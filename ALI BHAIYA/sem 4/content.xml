@@ -1,0 +1,1202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--   Created using wxMaxima 23.05.1   -->
+<!--https://wxMaxima-developers.github.io/wxmaxima/-->
+
+<wxMaximaDocument version="1.5" zoom="110">
+
+<cell type="section" sectioning_level="2">
+<editor type="section" sectioning_level="2">
+<line>Bisection Method</line>
+</editor>
+<fold>
+<cell type="subsection" sectioning_level="3">
+<editor type="subsection" sectioning_level="3">
+<line>Perform 10 iteration of Bisection Method to find the positive root of the equation f(x)=cos(x) which lies between 1 and 2.</line>
+</editor>
+<fold>
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line></line>
+<line>f(x):=cos(x);</line>
+<line>x0:1$</line>
+<line>x1:2$</line>
+<line>stop_err:0$         /*default value should be 0 for &apos;n&apos; iterations.*/</line>
+<line>n:10$                   /*this doesn&apos;t matter if stop_error is provided.*/</line>
+<line></line>
+<line>if stop_err#0 then n:1$</line>
+<line>if (float(f(x0)·f(x1)&gt;0)) then</line>
+<line>    print(&quot; change values&quot;)</line>
+<line>elseif (f(x1)=0) then </line>
+<line>    a:x1</line>
+<line>elseif (f(x0)=0) then </line>
+<line>    a:x0</line>
+<line>else</line>
+<line>    for i:1 thru n do</line>
+<line>        (a:(x0+x1)/ 2, err:float(x1-x0)/2,</line>
+<line>        print(i,&quot;iteration gives &quot;,float(a), &quot;with error estimate&quot;, err),</line>
+<line>        if i=n and stop_err#0 and err&gt;stop_err then n:n+1,</line>
+<line>        if (f(a)·f(x1))&gt;0 then x1:a</line>
+<line>        else x0:a</line>
+<line>)$</line>
+<line>wxplot2d([f(x), x=a],[x,-0.25,2.25], [y, -1, 1.25]);</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o1)	">(%o1) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><fn><r><fnm>cos</fnm></r><r><p><v>x</v></p></r></fn><n breakline="true">1</n><st> </st><st>iteration gives </st><st> </st><n>1.5</n><st> </st><st>with error estimate</st><st> </st><n>0.5</n><st> </st><n breakline="true">2</n><st> </st><st>iteration gives </st><st> </st><n>1.75</n><st> </st><st>with error estimate</st><st> </st><n>0.25</n><st> </st><n breakline="true">3</n><st> </st><st>iteration gives </st><st> </st><n>1.625</n><st> </st><st>with error estimate</st><st> </st><n>0.125</n><st> </st><n breakline="true">4</n><st> </st><st>iteration gives </st><st> </st><n>1.5625</n><st> </st><st>with error estimate</st><st> </st><n>0.0625</n><st> </st><n breakline="true">5</n><st> </st><st>iteration gives </st><st> </st><n>1.59375</n><st> </st><st>with error estimate</st><st> </st><n>0.03125</n><st> </st><n breakline="true">6</n><st> </st><st>iteration gives </st><st> </st><n>1.578125</n><st> </st><st>with error estimate</st><st> </st><n>0.015625</n><st> </st><n breakline="true">7</n><st> </st><st>iteration gives </st><st> </st><n>1.5703125</n><st> </st><st>with error estimate</st><st> </st><n>0.0078125</n><st> </st><n breakline="true">8</n><st> </st><st>iteration gives </st><st> </st><n>1.57421875</n><st> </st><st>with error estimate</st><st> </st><n>0.00390625</n><st> </st><n breakline="true">9</n><st> </st><st>iteration gives </st><st> </st><n>1.572265625</n><st> </st><st>with error estimate</st><st> </st><n>0.001953125</n><st> </st><n breakline="true">10</n><st> </st><st>iteration gives </st><st> </st><n>1.5712890625</n><st> </st><st>with error estimate</st><st> </st><n>9.765625</n><h>·</h><e><r><n>10</n></r><r><n>−4</n></r></e><st> </st><lbl altCopy="(%t8)	">(%t8) </lbl><img ppi="120">image1.png</img><lbl altCopy="(%o8)	">(%o8) </lbl><fnm></fnm>
+</mth></output>
+</cell>
+</fold>
+</cell>
+
+<cell type="subsection" sectioning_level="3">
+<editor type="subsection" sectioning_level="3">
+<line>Perform 12 iteration of Bisection Method to find the positive root of the x·exp(x)=1 which lies between 0 and 1.</line>
+</editor>
+<fold>
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line></line>
+<line>f(x):=x*exp(x)-1;</line>
+<line>x0:0$</line>
+<line>x1:1$</line>
+<line></line>
+<line>stop_err:0.0001$         /*default value should be 0 for &apos;n&apos; iterations.*/</line>
+<line>n:12$                   /*this doesn&apos;t matter if stop_error is provided.*/</line>
+<line></line>
+<line>if stop_err#0 then n:1$</line>
+<line>if (float(f(x0)·f(x1)&gt;0)) then</line>
+<line>    print(&quot; change values&quot;)</line>
+<line>elseif (f(x1)=0) then </line>
+<line>    a:x1</line>
+<line>elseif (f(x0)=0) then </line>
+<line>    a:x0</line>
+<line>else</line>
+<line>    for i:1 thru n do</line>
+<line>        (a:(x0+x1)/ 2, err:float(x1-x0)/2,</line>
+<line>        print(i,&quot;iteration gives &quot;,float(a), &quot;with error estimate&quot;, err),</line>
+<line>        if i=n and stop_err#0 and err&gt;stop_err then n:n+1,</line>
+<line>        if (f(a)·f(x1))&gt;0 then x1:a</line>
+<line>        else x0:a</line>
+<line>)$</line>
+<line></line>
+<line>print( &quot;After&quot;,n,&quot;iterations, root of&quot;, f(x), &quot;is&quot;,float(a))$</line>
+<line></line>
+<line>wxplot2d([f(x), x=a],[x,-0.25,1.25], [y, -1, 4]);</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o1)	">(%o1) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><v>x</v><h>·</h><fn><r><fnm>exp</fnm></r><r><p><v>x</v></p></r></fn><fnm>−</fnm><n>1</n><n breakline="true">1</n><st> </st><st>iteration gives </st><st> </st><n>0.5</n><st> </st><st>with error estimate</st><st> </st><n>0.5</n><st> </st><n breakline="true">2</n><st> </st><st>iteration gives </st><st> </st><n>0.75</n><st> </st><st>with error estimate</st><st> </st><n>0.25</n><st> </st><n breakline="true">3</n><st> </st><st>iteration gives </st><st> </st><n>0.625</n><st> </st><st>with error estimate</st><st> </st><n>0.125</n><st> </st><n breakline="true">4</n><st> </st><st>iteration gives </st><st> </st><n>0.5625</n><st> </st><st>with error estimate</st><st> </st><n>0.0625</n><st> </st><n breakline="true">5</n><st> </st><st>iteration gives </st><st> </st><n>0.59375</n><st> </st><st>with error estimate</st><st> </st><n>0.03125</n><st> </st><n breakline="true">6</n><st> </st><st>iteration gives </st><st> </st><n>0.578125</n><st> </st><st>with error estimate</st><st> </st><n>0.015625</n><st> </st><n breakline="true">7</n><st> </st><st>iteration gives </st><st> </st><n>0.5703125</n><st> </st><st>with error estimate</st><st> </st><n>0.0078125</n><st> </st><n breakline="true">8</n><st> </st><st>iteration gives </st><st> </st><n>0.56640625</n><st> </st><st>with error estimate</st><st> </st><n>0.00390625</n><st> </st><n breakline="true">9</n><st> </st><st>iteration gives </st><st> </st><n>0.568359375</n><st> </st><st>with error estimate</st><st> </st><n>0.001953125</n><st> </st><n breakline="true">10</n><st> </st><st>iteration gives </st><st> </st><n>0.5673828125</n><st> </st><st>with error estimate</st><st> </st><n>9.765625</n><h>·</h><e><r><n>10</n></r><r><n>−4</n></r></e><st> </st><n breakline="true">11</n><st> </st><st>iteration gives </st><st> </st><n>0.56689453125</n><st> </st><st>with error estimate</st><st> </st><n>4.8828125</n><h>·</h><e><r><n>10</n></r><r><n>−4</n></r></e><st> </st><n breakline="true">12</n><st> </st><st>iteration gives </st><st> </st><n>0.567138671875</n><st> </st><st>with error estimate</st><st> </st><n>2.44140625</n><h>·</h><e><r><n>10</n></r><r><n>−4</n></r></e><st> </st><n breakline="true">13</n><st> </st><st>iteration gives </st><st> </st><n>0.5672607421875</n><st> </st><st>with error estimate</st><st> </st><n>1.220703125</n><h>·</h><e><r><n>10</n></r><r><n>−4</n></r></e><st> </st><n breakline="true">14</n><st> </st><st>iteration gives </st><st> </st><n>0.56719970703125</n><st> </st><st>with error estimate</st><st> </st><n>6.103515625</n><h>·</h><e><r><n>10</n></r><r><n>−5</n></r></e><st> </st><st breakline="true">After</st><st> </st><n>14</n><st> </st><st>iterations, root of</st><st> </st><v>x</v><h>·</h><e><r><s>%e</s></r><r><v>x</v></r></e><fnm>−</fnm><n>1</n><st> </st><st>is</st><st> </st><n>0.56719970703125</n><st> </st><t breakline="true" type="ASCII-Art">plot2d: some values will be clipped.</t><lbl altCopy="(%t9)	">(%t9) </lbl><img ppi="120">image2.png</img><lbl altCopy="(%o9)	">(%o9) </lbl><fnm></fnm>
+</mth></output>
+</cell>
+</fold>
+</cell>
+
+<cell type="subsection" sectioning_level="3">
+<editor type="subsection" sectioning_level="3">
+<line>Perform 10 iteration of Bisection Method to find the positive root of the cos(x)=3·x−1</line>
+</editor>
+<fold>
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line></line>
+<line>f(x):=cos(x)-3·x+1;</line>
+<line>x0:0$</line>
+<line>x1:1$</line>
+<line></line>
+<line>stop_err:0$         /*default value should be 0 for &apos;n&apos; iterations.*/</line>
+<line>n:10$                   /*this doesn&apos;t matter if stop_error is provided.*/</line>
+<line></line>
+<line>if stop_err#0 then n:1$</line>
+<line>if (float(f(x0)·f(x1)&gt;0)) then</line>
+<line>    print(&quot; change values&quot;)</line>
+<line>elseif (f(x1)=0) then </line>
+<line>    a:x1</line>
+<line>elseif (f(x0)=0) then </line>
+<line>    a:x0</line>
+<line>else</line>
+<line>    for i:1 thru n do</line>
+<line>        (a:(x0+x1)/ 2, err:float(x1-x0)/2,</line>
+<line>        print(i,&quot;iteration gives &quot;,float(a), &quot;with error estimate&quot;, err),</line>
+<line>        if i=n and stop_err#0 and err&gt;stop_err then n:n+1,</line>
+<line>        if (f(a)·f(x1))&gt;0 then x1:a</line>
+<line>        else x0:a</line>
+<line>)$</line>
+<line></line>
+<line>print( &quot;After&quot;,n,&quot;iterations, root of&quot;, f(x), &quot;is&quot;,float(a))$</line>
+<line></line>
+<line>wxplot2d([f(x), x=a],[x,-0.25,1.25], [y, -1, 4]);</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o1)	">(%o1) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><fn><r><fnm>cos</fnm></r><r><p><v>x</v></p></r></fn><fnm>−</fnm><n>3</n><h>·</h><v>x</v><fnm>+</fnm><n>1</n><n breakline="true">1</n><st> </st><st>iteration gives </st><st> </st><n>0.5</n><st> </st><st>with error estimate</st><st> </st><n>0.5</n><st> </st><n breakline="true">2</n><st> </st><st>iteration gives </st><st> </st><n>0.75</n><st> </st><st>with error estimate</st><st> </st><n>0.25</n><st> </st><n breakline="true">3</n><st> </st><st>iteration gives </st><st> </st><n>0.625</n><st> </st><st>with error estimate</st><st> </st><n>0.125</n><st> </st><n breakline="true">4</n><st> </st><st>iteration gives </st><st> </st><n>0.5625</n><st> </st><st>with error estimate</st><st> </st><n>0.0625</n><st> </st><n breakline="true">5</n><st> </st><st>iteration gives </st><st> </st><n>0.59375</n><st> </st><st>with error estimate</st><st> </st><n>0.03125</n><st> </st><n breakline="true">6</n><st> </st><st>iteration gives </st><st> </st><n>0.609375</n><st> </st><st>with error estimate</st><st> </st><n>0.015625</n><st> </st><n breakline="true">7</n><st> </st><st>iteration gives </st><st> </st><n>0.6015625</n><st> </st><st>with error estimate</st><st> </st><n>0.0078125</n><st> </st><n breakline="true">8</n><st> </st><st>iteration gives </st><st> </st><n>0.60546875</n><st> </st><st>with error estimate</st><st> </st><n>0.00390625</n><st> </st><n breakline="true">9</n><st> </st><st>iteration gives </st><st> </st><n>0.607421875</n><st> </st><st>with error estimate</st><st> </st><n>0.001953125</n><st> </st><n breakline="true">10</n><st> </st><st>iteration gives </st><st> </st><n>0.6064453125</n><st> </st><st>with error estimate</st><st> </st><n>9.765625</n><h>·</h><e><r><n>10</n></r><r><n>−4</n></r></e><st> </st><st breakline="true">After</st><st> </st><n>10</n><st> </st><st>iterations, root of</st><st> </st><fn><r><fnm>cos</fnm></r><r><p><v>x</v></p></r></fn><fnm>−</fnm><n>3</n><h>·</h><v>x</v><fnm>+</fnm><n>1</n><st> </st><st>is</st><st> </st><n>0.6064453125</n><st> </st><t breakline="true" type="ASCII-Art">plot2d: some values will be clipped.</t><lbl altCopy="(%t9)	">(%t9) </lbl><img ppi="120">image3.png</img><lbl altCopy="(%o9)	">(%o9) </lbl><fnm></fnm>
+</mth></output>
+</cell>
+</fold>
+</cell>
+</fold>
+</cell>
+
+<cell type="section" sectioning_level="2">
+<editor type="section" sectioning_level="2">
+<line>False position Method (Regula Falsi)</line>
+</editor>
+<fold>
+<cell type="subsection" sectioning_level="3">
+<editor type="subsection" sectioning_level="3">
+<line>Base Algorithm</line>
+</editor>
+<fold>
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line>f(x):= x^3+2*x^2-3*x-1;           /*Enter given function of x*/                      </line>
+<line>a:1$                                            /*Domain Interval values (a, b)*/</line>
+<line>b:2$</line>
+<line></line>
+<line>stop_err:0$                 /*Stopping error, default value should be 0 if its not to be used and the algorithm will proceed to do &quot;n&quot; number of iterations*/</line>
+<line>n:10$                            /*Number of iterations, This is ignored if you&apos;ve specified a stopping error value.*/</line>
+<line></line>
+<line>p:makelist(1, n)$           /*stores the value of iterations*/</line>
+<line>if (float(f(a)·f(b)&gt;0)) then            </line>
+<line>    print(&quot;change values&quot;)          </line>
+<line>elseif (f(a)=0) and (f(b)=0) then</line>
+<line>    print(&quot;Roots are&quot;, a, &quot;and&quot;, b)</line>
+<line>elseif (f(a)=0) then</line>
+<line>    print(&quot;Root is&quot;, a)</line>
+<line>elseif (f(b)=0) then</line>
+<line>    print(&quot;Root is&quot;, b)</line>
+<line>else</line>
+<line>    for i:1 thru n do(                                                  </line>
+<line>        p[i]:float(a-(f(a)*(b-a))/(f(b)-f(a))),                                                                                                /*calculates newest iteration p_n.*/</line>
+<line>        if i&lt;3 then </line>
+<line>            print(&quot;Iteration no.&quot;, i, &quot;gives  x=&quot;,p[i])                                                                                       /*prints the first and second iterations.*/</line>
+<line>        else(</line>
+<line>            lambda:(p[i]-p[i-1])/(p[i-1]-p[i-2]),                                                                                          /*calculates Lambda for error evolution.*/                                       </line>
+<line>            err:(abs((lambda)/(lambda-1))*abs(p[i]-p[i-1])),                                                                    /*calculates error estimate.*/</line>
+<line>            print(&quot;Iteration no.&quot;, i, &quot;gives  x=&quot;,p[i], &quot;with error estimate of&quot;, err)),                                     /*prints further iterations along with their error estimate.*/</line>
+<line>        if (f(a)*f(p[i])&gt;0) then a:p[i] else b:p[i],                                                                                            /*assigns new values to &apos;a&apos; and &apos;b&apos; for next iteration.*/</line>
+<line>        if (i=n and stop_err#0 and err&gt;stop_err) then n:n+1,                                                                  /*keeps the code running till we hit the stopping error (ignores the value of n).*/</line>
+<line>        if (err&lt;stop_err or err=0.0) then return(&quot;complete, it doesn&apos;t converge beyond this.&quot;)            /*stops the code if the error hits 0 midway through &apos;n&apos; numbers of iterations and stops the loop.*/</line>
+<line>        );</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o1)	">(%o1) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><e><r><v>x</v></r><r><n>3</n></r></e><fnm>+</fnm><n>2</n><h>·</h><e><r><v>x</v></r><r><n>2</n></r></e><fnm>+</fnm><fnm>−</fnm><n>3</n><h>·</h><v>x</v><fnm>−</fnm><n>1</n><st breakline="true">Iteration no.</st><st> </st><n>1</n><st> </st><st>gives  x=</st><st> </st><n>1.1</n><st> </st><st breakline="true">Iteration no.</st><st> </st><n>2</n><st> </st><st>gives  x=</st><st> </st><n>1.1517436380772856</n><st> </st><st breakline="true">Iteration no.</st><st> </st><n>3</n><st> </st><st>gives  x=</st><st> </st><n>1.1768409099827861</n><st> </st><st>with error estimate of</st><st> </st><n>0.023638234686032922</n><st> </st><st breakline="true">Iteration no.</st><st> </st><n>4</n><st> </st><st>gives  x=</st><st> </st><n>1.1886276732938286</n><st> </st><st>with error estimate of</st><st> </st><n>0.01043745160935325</n><st> </st><st breakline="true">Iteration no.</st><st> </st><n>5</n><st> </st><st>gives  x=</st><st> </st><n>1.194078911293239</n><st> </st><st>with error estimate of</st><st> </st><n>0.004690375977451897</n><st> </st><st breakline="true">Iteration no.</st><st> </st><n>6</n><st> </st><st>gives  x=</st><st> </st><n>1.1965820882052478</n><st> </st><st>with error estimate of</st><st> </st><n>0.002125429042020296</n><st> </st><st breakline="true">Iteration no.</st><st> </st><n>7</n><st> </st><st>gives  x=</st><st> </st><n>1.197727754386817</n><st> </st><st>with error estimate of</st><st> </st><n>9.668807547225398</n><h>·</h><e><r><n>10</n></r><r><n>−4</n></r></e><st> </st><st breakline="true">Iteration no.</st><st> </st><n>8</n><st> </st><st>gives  x=</st><st> </st><n>1.1982513177920089</n><st> </st><st>with error estimate of</st><st> </st><n>4.40632399765834</n><h>·</h><e><r><n>10</n></r><r><n>−4</n></r></e><st> </st><st breakline="true">Iteration no.</st><st> </st><n>9</n><st> </st><st>gives  x=</st><st> </st><n>1.1984904184556144</n><st> </st><st>with error estimate of</st><st> </st><n>2.0097228557176272</n><h>·</h><e><r><n>10</n></r><r><n>−4</n></r></e><st> </st><st breakline="true">Iteration no.</st><st> </st><n>10</n><st> </st><st>gives  x=</st><st> </st><n>1.1985995764065946</n><st> </st><st>with error estimate of</st><st> </st><n>9.169777990208069</n><h>·</h><e><r><n>10</n></r><r><n>−5</n></r></e><st> </st><lbl altCopy="(%o7)	">(%o7) </lbl><v>done</v>
+</mth></output>
+</cell>
+
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line>f(x):= x^3+2*x^2-3*x-1;           /*Enter given function of x*/                      </line>
+<line>a:1$                                            /*Domain Interval values (a, b)*/</line>
+<line>b:2$</line>
+<line></line>
+<line>stop_err:0$                 /*Stopping error, default value should be 0 if its not to be used and the algorithm will proceed to do &quot;n&quot; number of iterations*/</line>
+<line>n:6$                            /*Number of iterations, This is ignored if you&apos;ve specified a stopping error value.*/</line>
+<line>graph_assist:true$                                        /*true : gives a graphical representation of the process(takes time).  false : no graphs, just iterations(fast). */</line>
+<line></line>
+<line>p:makelist(1, n)$</line>
+<line>g(x):=((f(b)-f(a))/(b-a))*(x-a)+f(a)$           /*equation of the secant line from f(a) to f(b).*/</line>
+<line>if (float(f(a)·f(b)&gt;0)) then            </line>
+<line>    print(&quot;change values&quot;)          </line>
+<line>elseif (f(a)=0) and (f(b)=0) then</line>
+<line>    print(&quot;Roots are&quot;, a, &quot;and&quot;, b)</line>
+<line>elseif (f(a)=0) then</line>
+<line>    print(&quot;Root is&quot;, a)</line>
+<line>elseif (f(b)=0) then</line>
+<line>    print(&quot;Root is&quot;, b)</line>
+<line>else</line>
+<line>    for i:1 thru n do(                                                  </line>
+<line>        p[i]:float(a-(f(a)*(b-a))/(f(b)-f(a))),                                                                                        /*calculates newest iteration and assigns it to &quot;iter#&quot;.*/</line>
+<line>        if graph_assist then (wxplot2d([f(x), x=a , g(x), x=b, x=p[i]], [x, min(a, b, p[i])-0.5, max(a, b, p[i])+0.5], [y, -3.5, 10])),      /*gives a graphical representation if &quot;graph_assist&quot; is true.*/</line>
+<line>        if i&lt;3 then </line>
+<line>            print(&quot;Iteration no.&quot;, i, &quot;gives  x=&quot;,p[i])                                                                         /*prints the first and second iterations.*/</line>
+<line>        else(</line>
+<line>            lambda:(p[i]-p[i-1])/(p[i-1]-p[i-2]),                                     /*calculates Lambda for error evolution.*/                                       </line>
+<line>            err:(abs((lambda)/(lambda-1))*abs(p[i]-p[i-1])),                                           /*calculates error estimate.*/</line>
+<line>            print(&quot;Iteration no.&quot;, i, &quot;gives  x=&quot;,p[i], &quot;with error estimate of&quot;, err)),            /*prints further iterations along with their error estimate.*/</line>
+<line>        if (f(a)*f(p[i])&gt;0) then a:p[i] else b:p[i],                                     /*assigns new values to &apos;a&apos; and &apos;b&apos; for next iteration.*/</line>
+<line>        if (i=n and stop_err#0 and err&gt;stop_err) then n:n+1,            /*keeps the code running till we hit the stopping error (ignores the value of n).*/</line>
+<line>        if (err&lt;stop_err or err=0.0) then return(&quot;complete, it does&apos;nt converge beyond this.&quot;)            /*stops the code if the error hits 0 midway through &apos;n&apos; numbers of iterations and stops the loop.*/</line>
+<line>        );</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o1)	">(%o1) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><e><r><v>x</v></r><r><n>3</n></r></e><fnm>+</fnm><n>2</n><h>·</h><e><r><v>x</v></r><r><n>2</n></r></e><fnm>+</fnm><fnm>−</fnm><n>3</n><h>·</h><v>x</v><fnm>−</fnm><n>1</n><t breakline="true" type="ASCII-Art">plot2d: some values will be clipped.</t><t breakline="true" type="ASCII-Art">plot2d: some values will be clipped.</t><lbl altCopy="(%t9)	">(%t9) </lbl><img ppi="120">image4.png</img><st breakline="true">Iteration no.</st><st> </st><n>1</n><st> </st><st>gives  x=</st><st> </st><n>1.1</n><st> </st><t breakline="true" type="ASCII-Art">plot2d: some values will be clipped.</t><t breakline="true" type="ASCII-Art">plot2d: some values will be clipped.</t><lbl altCopy="(%t10)	">(%t10) </lbl><img ppi="120">image5.png</img><st breakline="true">Iteration no.</st><st> </st><n>2</n><st> </st><st>gives  x=</st><st> </st><n>1.1517436380772856</n><st> </st><t breakline="true" type="ASCII-Art">plot2d: some values will be clipped.</t><t breakline="true" type="ASCII-Art">plot2d: some values will be clipped.</t><lbl altCopy="(%t11)	">(%t11) </lbl><img ppi="120">image6.png</img><st breakline="true">Iteration no.</st><st> </st><n>3</n><st> </st><st>gives  x=</st><st> </st><n>1.1768409099827861</n><st> </st><st>with error estimate of</st><st> </st><n>0.023638234686032922</n><st> </st><t breakline="true" type="ASCII-Art">plot2d: some values will be clipped.</t><t breakline="true" type="ASCII-Art">plot2d: some values will be clipped.</t><lbl altCopy="(%t12)	">(%t12) </lbl><img ppi="120">image7.png</img><st breakline="true">Iteration no.</st><st> </st><n>4</n><st> </st><st>gives  x=</st><st> </st><n>1.1886276732938286</n><st> </st><st>with error estimate of</st><st> </st><n>0.01043745160935325</n><st> </st><t breakline="true" type="ASCII-Art">plot2d: some values will be clipped.</t><t breakline="true" type="ASCII-Art">plot2d: some values will be clipped.</t><lbl altCopy="(%t13)	">(%t13) </lbl><img ppi="120">image8.png</img><st breakline="true">Iteration no.</st><st> </st><n>5</n><st> </st><st>gives  x=</st><st> </st><n>1.194078911293239</n><st> </st><st>with error estimate of</st><st> </st><n>0.004690375977451897</n><st> </st><t breakline="true" type="ASCII-Art">plot2d: some values will be clipped.</t><t breakline="true" type="ASCII-Art">plot2d: some values will be clipped.</t><lbl altCopy="(%t14)	">(%t14) </lbl><img ppi="120">image9.png</img><st breakline="true">Iteration no.</st><st> </st><n>6</n><st> </st><st>gives  x=</st><st> </st><n>1.1965820882052478</n><st> </st><st>with error estimate of</st><st> </st><n>0.002125429042020296</n><st> </st><lbl altCopy="(%o14)	">(%o14) </lbl><v>done</v>
+</mth></output>
+</cell>
+</fold>
+</cell>
+</fold>
+</cell>
+
+<cell type="section" sectioning_level="2">
+<editor type="section" sectioning_level="2">
+<line>Secant Method</line>
+</editor>
+<fold>
+<cell type="subsection" sectioning_level="3">
+<editor type="subsection" sectioning_level="3">
+<line>Perform 6 iterations of the Secant method to obtain a real root of the following equation f(x) = x^3-5x+1=0 in the interval (0,1).</line>
+</editor>
+<fold>
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line>f(x):=x^3−5·x+1;                        </line>
+<line>[a, b]:[0, 1]$</line>
+<line></line>
+<line>stop_err:0$</line>
+<line>n:10$</line>
+<line>graph_assist:false$</line>
+<line></line>
+<line>p:makelist(1, n+2)$ p[1]:a$ p[2]:b$ s:[]$</line>
+<line>if (f(a)=f(b) and f(a)#0) then</line>
+<line>    print(&quot;change values&quot;)</line>
+<line>elseif member(0, f([a, b])) then</line>
+<line>   (for o in [a, b] do (if (f(o)=0) then (s:cons(o, s))),</line>
+<line>    if length(s)#0 then print(&quot;Roots is/are&quot;, o))</line>
+<line>else</line>
+<line>    for i:3 thru n+2 do(</line>
+<line>        if (f(p[i-1])-f(p[i-2])=0.0) then return(&quot;does not converge beyond this&quot;),</line>
+<line>        g(x):=((f(p[i-1])-f(p[i-2]))/(p[i-1]-p[i-2]))*(x-p[i-2])+f(p[i-2]),</line>
+<line>        p[i]:float(p[i-2]-(f(p[i-2])*(p[i-1]-p[i-2]))/(f(p[i-1])-f(p[i-2]))),</line>
+<line>        if graph_assist then (wxplot2d([f(x), x=p[i-2] , g(x), x=p[i-1], x=p[i]], [x, min(p[i-1], p[i-2], p[i])-1, max(p[i-1], p[i-2], p[i])+1], [y, -10, 10])),</line>
+<line>        print(&quot;iteration no.&quot;, i-2, &quot;gives x=&quot;, p[i], &quot;with error estimate of&quot;, abs(p[i]-p[i-1])),</line>
+<line>        if (i=n and stop_err#0 and err&gt;stop_err) then n:n+1,</line>
+<line>        </line>
+<line>        if (err&lt;stop_err or err=0.0) then return(&quot;Complete.&quot;)</line>
+<line>        );</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o1)	">(%o1) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><e><r><v>x</v></r><r><n>3</n></r></e><fnm>−</fnm><n>5</n><h>·</h><v>x</v><fnm>+</fnm><n>1</n><st breakline="true">iteration no.</st><st> </st><n>1</n><st> </st><st>gives x=</st><st> </st><n>0.25</n><st> </st><st>with error estimate of</st><st> </st><n>0.75</n><st> </st><st breakline="true">iteration no.</st><st> </st><n>2</n><st> </st><st>gives x=</st><st> </st><n>0.18644067796610164</n><st> </st><st>with error estimate of</st><st> </st><n>0.06355932203389836</n><st> </st><st breakline="true">iteration no.</st><st> </st><n>3</n><st> </st><st>gives x=</st><st> </st><n>0.20173625617912722</n><st> </st><st>with error estimate of</st><st> </st><n>0.015295578213025574</n><st> </st><st breakline="true">iteration no.</st><st> </st><n>4</n><st> </st><st>gives x=</st><st> </st><n>0.2016398528913041</n><st> </st><st>with error estimate of</st><st> </st><n>9.640328782312135</n><h>·</h><e><r><n>10</n></r><r><n>−5</n></r></e><st> </st><st breakline="true">iteration no.</st><st> </st><n>5</n><st> </st><st>gives x=</st><st> </st><n>0.20163967572128236</n><st> </st><st>with error estimate of</st><st> </st><n>1.771700217367833</n><h>·</h><e><r><n>10</n></r><r><n>−7</n></r></e><st> </st><st breakline="true">iteration no.</st><st> </st><n>6</n><st> </st><st>gives x=</st><st> </st><n>0.2016396757234047</n><st> </st><st>with error estimate of</st><st> </st><n>2.122330089449065</n><h>·</h><e><r><n>10</n></r><r><n>−12</n></r></e><st> </st><st breakline="true">iteration no.</st><st> </st><n>7</n><st> </st><st>gives x=</st><st> </st><n>0.20163967572340463</n><st> </st><st>with error estimate of</st><st> </st><n>5.551115123125783</n><h>·</h><e><r><n>10</n></r><r><n>−17</n></r></e><st> </st><st breakline="true">iteration no.</st><st> </st><n>8</n><st> </st><st>gives x=</st><st> </st><n>0.20163967572340466</n><st> </st><st>with error estimate of</st><st> </st><n>2.7755575615628914</n><h>·</h><e><r><n>10</n></r><r><n>−17</n></r></e><st> </st><lbl altCopy="(%o10)	">(%o10) </lbl><st>does not converge beyond this</st>
+</mth></output>
+</cell>
+</fold>
+</cell>
+
+<cell type="subsection" sectioning_level="3">
+<editor type="subsection" sectioning_level="3">
+<line>Perform 6 iterations of the Secant method to obtain a real root of the following equation in the interval(-1,1): f(x) = x^2-1=0.</line>
+</editor>
+<fold>
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line>f(x):=x^2-1;                        </line>
+<line>a:-1$</line>
+<line>b:1$</line>
+<line></line>
+<line>stop_err:0$</line>
+<line>n:6$</line>
+<line>graph_assist:true$</line>
+<line></line>
+<line>p:makelist(1, n)$</line>
+<line>g(x):=((f(b)-f(a))/(b-a))*(x-a)+f(a)$</line>
+<line>if (f(a)=f(b) and f(a)#0) then</line>
+<line>    print(&quot;change values&quot;)</line>
+<line>elseif (f(a)=0) and (f(b)=0) then</line>
+<line>    print(&quot;Roots are&quot;, a, &quot;and&quot;, b)</line>
+<line>elseif (f(a)=0) then</line>
+<line>    print(&quot;Root is&quot;, a)</line>
+<line>elseif (f(b)=0) then</line>
+<line>    print(&quot;Root is&quot;, b)</line>
+<line>else</line>
+<line>    for i:1 thru n do(</line>
+<line>        </line>
+<line>        p[i]:float(a-(f(a)*(b-a))/(f(b)-f(a))),</line>
+<line>        if graph_assist then (wxplot2d([f(x), x=a , g(x), x=b, x=p[i]], [x, min(a, b, p[i])-1, max(a, b, p[i])+1], [y, -10, 10])),</line>
+<line>        if i&lt;3 then </line>
+<line>            print(&quot;Iteration no.&quot;, i, &quot;gives  x=&quot;, p[i])</line>
+<line>        else (</line>
+<line>            lambda:(p[i]-p[i-1])/(p[i-1]-p[i-2]),                                                                                                                             </line>
+<line>            err:(abs((lambda)/(lambda-1))*abs(p[i]-p[i-1])),                                                                   </line>
+<line>            print(&quot;Iteration no.&quot;, i, &quot;gives  x=&quot;,p[i], &quot;with error estimate of&quot;, err)),</line>
+<line>        a:b, b:p[i],</line>
+<line>        if (i=n and stop_err#0 and err&gt;stop_err) then n:n+1,</line>
+<line>        if (f(b)=f(a)) then return(&quot;does not converge beyond this&quot;),</line>
+<line>        if (err&lt;stop_err or err=0.0) then return(&quot;Complete.&quot;)</line>
+<line>        )$</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o1)	">(%o1) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><e><r><v>x</v></r><r><n>2</n></r></e><fnm>−</fnm><n>1</n><st breakline="true">Roots are</st><st> </st><fnm>−</fnm><n>1</n><st> </st><st>and</st><st> </st><n>1</n><st> </st>
+</mth></output>
+</cell>
+</fold>
+</cell>
+</fold>
+</cell>
+
+<cell type="section" sectioning_level="2">
+<editor type="section" sectioning_level="2">
+<line>Newton-Raphson Method</line>
+</editor>
+<fold>
+<cell type="subsection" sectioning_level="3">
+<editor type="subsection" sectioning_level="3">
+<line>Closed Root</line>
+</editor>
+<fold>
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line>a:0$</line>
+<line>b:2$</line>
+<line>n:3$</line>
+<line>x1:(a+b)/2$</line>
+<line></line>
+<line>f(x):= cos(x);</line>
+<line>g: diff(f(x), x)$</line>
+<line>g(x):=(ev(g, x=x1))*(x-x1)+f(x1)$</line>
+<line></line>
+<line>if(float(f(a)·f(b)&gt;0)) then</line>
+<line>    print(&quot; change values&quot;)</line>
+<line>else</line>
+<line>    for i:1 thru n do(</line>
+<line>        c:float(x1-(f(x1)/ev(g, x=x1))),</line>
+<line>        wxplot2d([f(x), x=a, x=x1, x=b, g(x), x=c], [x, -0.25, 2.25], [y, -1.5, 1.5]),</line>
+<line>        print(&quot;Iteration no.&quot;, i, &quot;gives&quot;, c, &quot;with error coefficient of&quot;, abs(x1-c)),</line>
+<line>        x1:c</line>
+<line>);</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o5)	">(%o5) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><fn><r><fnm>cos</fnm></r><r><p><v>x</v></p></r></fn><t breakline="true" type="ASCII-Art">plot2d: some values will be clipped.</t><lbl altCopy="(%t8)	">(%t8) </lbl><img ppi="120">image10.png</img><st breakline="true">Iteration no.</st><st> </st><n>1</n><st> </st><st>gives</st><st> </st><n>1.6420926159343308</n><st> </st><st>with error coefficient of</st><st> </st><n>0.6420926159343308</n><st> </st><t breakline="true" type="ASCII-Art">plot2d: some values will be clipped.</t><lbl altCopy="(%t9)	">(%t9) </lbl><img ppi="120">image11.png</img><st breakline="true">Iteration no.</st><st> </st><n>2</n><st> </st><st>gives</st><st> </st><n>1.5706752771612507</n><st> </st><st>with error coefficient of</st><st> </st><n>0.0714173387730801</n><st> </st><t breakline="true" type="ASCII-Art">plot2d: some values will be clipped.</t><lbl altCopy="(%t10)	">(%t10) </lbl><img ppi="120">image12.png</img><st breakline="true">Iteration no.</st><st> </st><n>3</n><st> </st><st>gives</st><st> </st><n>1.5707963267954879</n><st> </st><st>with error coefficient of</st><st> </st><n>1.210496342372025</n><h>·</h><e><r><n>10</n></r><r><n>−4</n></r></e><st> </st><lbl altCopy="(%o10)	">(%o10) </lbl><v>done</v>
+</mth></output>
+</cell>
+</fold>
+</cell>
+
+<cell type="subsection" sectioning_level="3">
+<editor type="subsection" sectioning_level="3">
+<line>Open Root</line>
+</editor>
+<fold>
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line>f(x):= x^3-5*x+1;</line>
+<line>n:8$</line>
+<line>x1:0.5$</line>
+<line>graph_assist:false$</line>
+<line></line>
+<line>g: diff(f(x), x)$</line>
+<line>g(x):=(ev(g, x=x1))*(x-x1)+f(x1)$</line>
+<line>if (ev(g, x=x1)=0) then</line>
+<line>    print(&quot;change initial value&quot;)</line>
+<line>else</line>
+<line>    for i:1 thru n do(</line>
+<line>        c:float(x1-(f(x1)/ev(g, x=x1))),</line>
+<line>        if graph_assist then (wxplot2d([f(x), x=x1 , g(x), x=c], [x, -0.25, 2.25], [y, -4, 3.5])),</line>
+<line>        print(&quot;Iteration no.&quot;, i, &quot;gives&quot;, c, &quot;with error coefficient of&quot;, abs(x1-c)),</line>
+<line>        x1:c</line>
+<line>);</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o1)	">(%o1) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><e><r><v>x</v></r><r><n>3</n></r></e><fnm>−</fnm><n>5</n><h>·</h><v>x</v><fnm>+</fnm><n>1</n><st breakline="true">Iteration no.</st><st> </st><n>1</n><st> </st><st>gives</st><st> </st><n>0.1764705882352941</n><st> </st><st>with error coefficient of</st><st> </st><n>0.3235294117647059</n><st> </st><st breakline="true">Iteration no.</st><st> </st><n>2</n><st> </st><st>gives</st><st> </st><n>0.201568074338339</n><st> </st><st>with error coefficient of</st><st> </st><n>0.025097486103044908</n><st> </st><st breakline="true">Iteration no.</st><st> </st><n>3</n><st> </st><st>gives</st><st> </st><n>0.20163967508780217</n><st> </st><st>with error coefficient of</st><st> </st><n>7.16007494631632</n><h>·</h><e><r><n>10</n></r><r><n>−5</n></r></e><st> </st><st breakline="true">Iteration no.</st><st> </st><n>4</n><st> </st><st>gives</st><st> </st><n>0.20163967572340463</n><st> </st><st>with error coefficient of</st><st> </st><n>6.356024595532972</n><h>·</h><e><r><n>10</n></r><r><n>−10</n></r></e><st> </st><st breakline="true">Iteration no.</st><st> </st><n>5</n><st> </st><st>gives</st><st> </st><n>0.20163967572340466</n><st> </st><st>with error coefficient of</st><st> </st><n>2.7755575615628914</n><h>·</h><e><r><n>10</n></r><r><n>−17</n></r></e><st> </st><st breakline="true">Iteration no.</st><st> </st><n>6</n><st> </st><st>gives</st><st> </st><n>0.2016396757234047</n><st> </st><st>with error coefficient of</st><st> </st><n>2.7755575615628914</n><h>·</h><e><r><n>10</n></r><r><n>−17</n></r></e><st> </st><st breakline="true">Iteration no.</st><st> </st><n>7</n><st> </st><st>gives</st><st> </st><n>0.20163967572340463</n><st> </st><st>with error coefficient of</st><st> </st><n>5.551115123125783</n><h>·</h><e><r><n>10</n></r><r><n>−17</n></r></e><st> </st><st breakline="true">Iteration no.</st><st> </st><n>8</n><st> </st><st>gives</st><st> </st><n>0.20163967572340466</n><st> </st><st>with error coefficient of</st><st> </st><n>2.7755575615628914</n><h>·</h><e><r><n>10</n></r><r><n>−17</n></r></e><st> </st><lbl altCopy="(%o7)	">(%o7) </lbl><v>done</v>
+</mth></output>
+</cell>
+
+<cell type="subsection" sectioning_level="4">
+<editor type="subsection" sectioning_level="4">
+<line>Perform 6 iterations of Newton Raphson Method to find out the smallest positive root of the following equation starting with approximation x=0.4</line>
+<line>f(x)= x^2-1 =0</line>
+</editor>
+<fold>
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line>n:5$</line>
+<line>x1:0.4$</line>
+<line></line>
+<line>f(x):=x^2-1;</line>
+<line>g: diff(f(x), x)$</line>
+<line>g(x):=(ev(g, x=x1))*(x-x1)+f(x1)$</line>
+<line></line>
+<line>if (ev(g, x=x1)=0) then</line>
+<line>    print(&quot;change initial value&quot;)</line>
+<line>else</line>
+<line>    for i:1 thru n do(</line>
+<line>        c:float(x1-(f(x1)/ev(g, x=x1))),</line>
+<line>        wxplot2d([f(x), x=x1 , g(x), x=c], [x, -0.25, 2.25], [y, -4, 3.5]),</line>
+<line>        print(&quot;Iteration no.&quot;, i, &quot;gives&quot;, c, &quot;with error coefficient of&quot;, abs(x1-c)),</line>
+<line>        x1:c</line>
+<line>)$</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o3)	">(%o3) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><e><r><v>x</v></r><r><n>2</n></r></e><fnm>−</fnm><n>1</n><t breakline="true" type="ASCII-Art">plot2d: some values will be clipped.</t><lbl altCopy="(%t6)	">(%t6) </lbl><img ppi="120">image13.png</img><st breakline="true">Iteration no.</st><st> </st><n>1</n><st> </st><st>gives</st><st> </st><n>1.4499999999999997</n><st> </st><st>with error coefficient of</st><st> </st><n>1.0499999999999998</n><st> </st><t breakline="true" type="ASCII-Art">plot2d: some values will be clipped.</t><lbl altCopy="(%t7)	">(%t7) </lbl><img ppi="120">image14.png</img><st breakline="true">Iteration no.</st><st> </st><n>2</n><st> </st><st>gives</st><st> </st><n>1.0698275862068964</n><st> </st><st>with error coefficient of</st><st> </st><n>0.3801724137931033</n><st> </st><t breakline="true" type="ASCII-Art">plot2d: some values will be clipped.</t><lbl altCopy="(%t8)	">(%t8) </lbl><img ppi="120">image15.png</img><st breakline="true">Iteration no.</st><st> </st><n>3</n><st> </st><st>gives</st><st> </st><n>1.0022788213065104</n><st> </st><st>with error coefficient of</st><st> </st><n>0.06754876490038608</n><st> </st><t breakline="true" type="ASCII-Art">plot2d: some values will be clipped.</t><lbl altCopy="(%t9)	">(%t9) </lbl><img ppi="120">image16.png</img><st breakline="true">Iteration no.</st><st> </st><n>4</n><st> </st><st>gives</st><st> </st><n>1.0000025906097367</n><st> </st><st>with error coefficient of</st><st> </st><n>0.002276230696773629</n><st> </st><t breakline="true" type="ASCII-Art">plot2d: some values will be clipped.</t><lbl altCopy="(%t10)	">(%t10) </lbl><img ppi="120">image17.png</img><st breakline="true">Iteration no.</st><st> </st><n>5</n><st> </st><st>gives</st><st> </st><n>1.0000000000033555</n><st> </st><st>with error coefficient of</st><st> </st><n>2.5906063811920177</n><h>·</h><e><r><n>10</n></r><r><n>−6</n></r></e><st> </st>
+</mth></output>
+</cell>
+</fold>
+</cell>
+</fold>
+</cell>
+</fold>
+</cell>
+
+<cell type="section" sectioning_level="2">
+<editor type="section" sectioning_level="2">
+<line>LU Decomposition</line>
+</editor>
+<fold>
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line>A: matrix(</line>
+<line>[1,3,2],</line>
+<line>[3,2,6],</line>
+<line>[2,4,8])$</line>
+<line>X:matrix([x1], [x2], [x3])$</line>
+<line>B:matrix([1], [2], [3])$</line>
+<line>print(&quot;Ax=b -&gt;  &quot;,A,X=B)$</line>
+<line></line>
+<line>print(&quot;LU Decomposition  -&quot;)$</line>
+<line>lf:lu_factor (A, generalring)$</line>
+<line>PLU:get_lu_factors (lf)$</line>
+<line>print(&apos;L=L:PLU[2],&apos;U=U:PLU[3], Y=Y:invert(L).B ,&quot;     &quot;, X=invert(U).Y )$</line>
+</editor>
+</input>
+<output>
+<mth><st breakline="true">Ax=b →  </st><st> </st><tb roundedParens="true"><mtr><mtd><n>1</n></mtd><mtd><n>3</n></mtd><mtd><n>2</n></mtd></mtr><mtr><mtd><n>3</n></mtd><mtd><n>2</n></mtd><mtd><n>6</n></mtd></mtr><mtr><mtd><n>2</n></mtd><mtd><n>4</n></mtd><mtd><n>8</n></mtd></mtr></tb><st> </st><tb roundedParens="true"><mtr><mtd><v>x1</v></mtd></mtr><mtr><mtd><v>x2</v></mtd></mtr><mtr><mtd><v>x3</v></mtd></mtr></tb><fnm>=</fnm><tb roundedParens="true"><mtr><mtd><n>1</n></mtd></mtr><mtr><mtd><n>2</n></mtd></mtr><mtr><mtd><n>3</n></mtd></mtr></tb><st> </st><st breakline="true">LU Decomposition  −</st><st> </st><v breakline="true">L</v><fnm>=</fnm><tb roundedParens="true"><mtr><mtd><n>1</n></mtd><mtd><n>0</n></mtd><mtd><n>0</n></mtd></mtr><mtr><mtd><n>3</n></mtd><mtd><n>1</n></mtd><mtd><n>0</n></mtd></mtr><mtr><mtd><n>2</n></mtd><mtd><f><r><n>2</n></r><r><n>7</n></r></f></mtd><mtd><n>1</n></mtd></mtr></tb><st> </st><v>U</v><fnm>=</fnm><tb roundedParens="true"><mtr><mtd><n>1</n></mtd><mtd><n>3</n></mtd><mtd><n>2</n></mtd></mtr><mtr><mtd><n>0</n></mtd><mtd><fnm>−</fnm><n>7</n></mtd><mtd><n>0</n></mtd></mtr><mtr><mtd><n>0</n></mtd><mtd><n>0</n></mtd><mtd><n>4</n></mtd></mtr></tb><st> </st><v>Y</v><fnm>=</fnm><tb roundedParens="true"><mtr><mtd><n>1</n></mtd></mtr><mtr><mtd><fnm>−</fnm><n>1</n></mtd></mtr><mtr><mtd><f><r><n>9</n></r><r><n>7</n></r></f></mtd></mtr></tb><st> </st><st>     </st><st> </st><tb roundedParens="true"><mtr><mtd><v>x1</v></mtd></mtr><mtr><mtd><v>x2</v></mtd></mtr><mtr><mtd><v>x3</v></mtd></mtr></tb><fnm>=</fnm><tb roundedParens="true"><mtr><mtd><fnm>−</fnm><r><p><f><r><n>1</n></r><r><n>14</n></r></f></p></r></mtd></mtr><mtr><mtd><f><r><n>1</n></r><r><n>7</n></r></f></mtd></mtr><mtr><mtd><f><r><n>9</n></r><r><n>28</n></r></f></mtd></mtr></tb><st> </st>
+</mth></output>
+</cell>
+</fold>
+</cell>
+
+<cell type="section" sectioning_level="2">
+<editor type="section" sectioning_level="2">
+<line>Gauss Jacobi</line>
+</editor>
+<fold>
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line>A: matrix(</line>
+<line>[4,2,-1],</line>
+<line>[2,4,1],</line>
+<line>[-1,1,4])$</line>
+<line>X:matrix([x1], [x2], [x3])$</line>
+<line>B:matrix(</line>
+<line>    [1], </line>
+<line>    [-1], </line>
+<line>    [1])$</line>
+<line>print(&quot;Original system of equations-&quot;)$</line>
+<line>print(&quot;A*x=b -&gt;  &quot;,A,X=B)$</line>
+<line>Ax:A.X$</line>
+<line>print(&quot;Upon multiplication -&gt;&quot;, Ax=B)$</line>
+<line></line>
+<line>print(&quot;Solving for respective variables -&quot;)$</line>
+<line>for i:1 thru 3 do (</line>
+<line>    a:concat(s, i),</line>
+<line>    b:(solve(Ax[i][1]=B[i][1],concat(x, i))), </line>
+<line>    a::pop(b),</line>
+<line>    print(ev(a))</line>
+<line>)$</line>
+<line>x1:0.0$ x2:0.0$ x3:0.0$</line>
+<line></line>
+<line>print(&quot;Running Iterations...&quot;)$</line>
+<line>it:10$</line>
+<line>for i:1 thru it+1 do (</line>
+<line>    err:(abs(ev(lhs(s1)-rhs(s1))) +abs(ev(lhs(s2)-rhs(s2))) + abs(ev(lhs(s3)-rhs(s3))))/3,</line>
+<line>    print(&quot;Iteration&quot;, i-1 ,&quot;-&gt;    x1=&quot;,x1,&quot;     x2=&quot;, x2,&quot;     x3=&quot;, x3, &quot;     with avg error of&quot;, err),</line>
+<line>    a:ev(rhs(s1)),</line>
+<line>    b:ev(rhs(s2)),</line>
+<line>    c:ev(rhs(s3)),</line>
+<line>    x1:a, x2:b, x3:c,</line>
+<line>    if (((abs(ev(lhs(s1)-rhs(s1))) +abs(ev(lhs(s2)-rhs(s2))) + abs(ev(lhs(s3)-rhs(s3))))/3)&gt;err) then return(&quot;The system of equations doesn&apos;t converge beyond this&quot;)</line>
+<line>) ;</line>
+</editor>
+</input>
+<output>
+<mth><st breakline="true">Original system of equations−</st><st> </st><st breakline="true">A*x=b →  </st><st> </st><tb roundedParens="true"><mtr><mtd><n>4</n></mtd><mtd><n>2</n></mtd><mtd><fnm>−</fnm><n>1</n></mtd></mtr><mtr><mtd><n>2</n></mtd><mtd><n>4</n></mtd><mtd><n>1</n></mtd></mtr><mtr><mtd><fnm>−</fnm><n>1</n></mtd><mtd><n>1</n></mtd><mtd><n>4</n></mtd></mtr></tb><st> </st><tb roundedParens="true"><mtr><mtd><v>x1</v></mtd></mtr><mtr><mtd><v>x2</v></mtd></mtr><mtr><mtd><v>x3</v></mtd></mtr></tb><fnm>=</fnm><tb roundedParens="true"><mtr><mtd><n>1</n></mtd></mtr><mtr><mtd><fnm>−</fnm><n>1</n></mtd></mtr><mtr><mtd><n>1</n></mtd></mtr></tb><st> </st><st breakline="true">Upon multiplication →</st><st> </st><tb roundedParens="true"><mtr><mtd><fnm>−</fnm><v>x3</v><fnm>+</fnm><n>2</n><h>·</h><v>x2</v><fnm>+</fnm><n>4</n><h>·</h><v>x1</v></mtd></mtr><mtr><mtd><v>x3</v><fnm>+</fnm><n>4</n><h>·</h><v>x2</v><fnm>+</fnm><n>2</n><h>·</h><v>x1</v></mtd></mtr><mtr><mtd><n>4</n><h>·</h><v>x3</v><fnm>+</fnm><v>x2</v><fnm>−</fnm><v>x1</v></mtd></mtr></tb><fnm>=</fnm><tb roundedParens="true"><mtr><mtd><n>1</n></mtd></mtr><mtr><mtd><fnm>−</fnm><n>1</n></mtd></mtr><mtr><mtd><n>1</n></mtd></mtr></tb><st> </st><st breakline="true">Solving for respective variables −</st><st> </st><v breakline="true">x1</v><fnm>=</fnm><f><r><v>x3</v><fnm>−</fnm><n>2</n><h>·</h><v>x2</v><fnm>+</fnm><n>1</n></r><r><n>4</n></r></f><st> </st><v breakline="true">x2</v><fnm>=</fnm><fnm>−</fnm><r><p><f><r><v>x3</v><fnm>+</fnm><n>2</n><h>·</h><v>x1</v><fnm>+</fnm><n>1</n></r><r><n>4</n></r></f></p></r><st> </st><v breakline="true">x3</v><fnm>=</fnm><fnm>−</fnm><r><p><f><r><v>x2</v><fnm>−</fnm><v>x1</v><fnm>−</fnm><n>1</n></r><r><n>4</n></r></f></p></r><st> </st><st breakline="true">Running Iterations...</st><st> </st><st breakline="true">Iteration</st><st> </st><n>0</n><st> </st><st>→    x1=</st><st> </st><n>0.0</n><st> </st><st>     x2=</st><st> </st><n>0.0</n><st> </st><st>     x3=</st><st> </st><n>0.0</n><st> </st><st>     with avg error of</st><st> </st><n>0.25</n><st> </st><st breakline="true">Iteration</st><st> </st><n>1</n><st> </st><st>→    x1=</st><st> </st><n>0.25</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>0.25</n><st> </st><st>     x3=</st><st> </st><n>0.25</n><st> </st><st>     with avg error of</st><st> </st><n>0.16666666666666666</n><st> </st><st breakline="true">Iteration</st><st> </st><n>2</n><st> </st><st>→    x1=</st><st> </st><n>0.4375</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>0.4375</n><st> </st><st>     x3=</st><st> </st><n>0.375</n><st> </st><st>     with avg error of</st><st> </st><n>0.11458333333333333</n><st> </st><st breakline="true">Iteration</st><st> </st><n>3</n><st> </st><st>→    x1=</st><st> </st><n>0.5625</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>0.5625</n><st> </st><st>     x3=</st><st> </st><n>0.46875</n><st> </st><st>     with avg error of</st><st> </st><n>0.078125</n><st> </st><st breakline="true">Iteration</st><st> </st><n>4</n><st> </st><st>→    x1=</st><st> </st><n>0.6484375</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>0.6484375</n><st> </st><st>     x3=</st><st> </st><n>0.53125</n><st> </st><st>     with avg error of</st><st> </st><n>0.053385416666666664</n><st> </st><st breakline="true">Iteration</st><st> </st><n>5</n><st> </st><st>→    x1=</st><st> </st><n>0.70703125</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>0.70703125</n><st> </st><st>     x3=</st><st> </st><n>0.57421875</n><st> </st><st>     with avg error of</st><st> </st><n>0.036458333333333336</n><st> </st><st breakline="true">Iteration</st><st> </st><n>6</n><st> </st><st>→    x1=</st><st> </st><n>0.7470703125</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>0.7470703125</n><st> </st><st>     x3=</st><st> </st><n>0.603515625</n><st> </st><st>     with avg error of</st><st> </st><n>0.02490234375</n><st> </st><st breakline="true">Iteration</st><st> </st><n>7</n><st> </st><st>→    x1=</st><st> </st><n>0.7744140625</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>0.7744140625</n><st> </st><st>     x3=</st><st> </st><n>0.62353515625</n><st> </st><st>     with avg error of</st><st> </st><n>0.017008463541666668</n><st> </st><st breakline="true">Iteration</st><st> </st><n>8</n><st> </st><st>→    x1=</st><st> </st><n>0.7930908203125</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>0.7930908203125</n><st> </st><st>     x3=</st><st> </st><n>0.63720703125</n><st> </st><st>     with avg error of</st><st> </st><n>0.011617024739583334</n><st> </st><st breakline="true">Iteration</st><st> </st><n>9</n><st> </st><st>→    x1=</st><st> </st><n>0.80584716796875</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>0.80584716796875</n><st> </st><st>     x3=</st><st> </st><n>0.64654541015625</n><st> </st><st>     with avg error of</st><st> </st><n>0.0079345703125</n><st> </st><st breakline="true">Iteration</st><st> </st><n>10</n><st> </st><st>→    x1=</st><st> </st><n>0.8145599365234375</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>0.8145599365234375</n><st> </st><st>     x3=</st><st> </st><n>0.652923583984375</n><st> </st><st>     with avg error of</st><st> </st><n>0.005419413248697917</n><st> </st><lbl altCopy="(%o15)	">(%o15) </lbl><v>done</v>
+</mth></output>
+</cell>
+
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line>A: matrix(</line>
+<line>[4,-1,0],</line>
+<line>[-1,4,-1],</line>
+<line>[0,-1,4])$</line>
+<line>X:matrix([x1], [x2], [x3])$</line>
+<line>B:matrix(</line>
+<line>    [2], </line>
+<line>    [4], </line>
+<line>    [10])$</line>
+<line>print(&quot;Original system of equations-&quot;)$</line>
+<line>print(&quot;A*x=b -&gt;  &quot;,A,X=B)$</line>
+<line>Ax:A.X$</line>
+<line>print(&quot;Upon multiplication -&gt;&quot;, Ax=B)$</line>
+<line></line>
+<line>print(&quot;Solving for respective variables -&quot;)$</line>
+<line>for i:1 thru 3 do (</line>
+<line>    a:concat(s, i),</line>
+<line>    b:(solve(Ax[i][1]=B[i][1],concat(x, i))), </line>
+<line>    a::pop(b),</line>
+<line>    print(ev(a))</line>
+<line>)$</line>
+<line>x1:0.0$ x2:0.0$ x3:0.0$</line>
+<line></line>
+<line>print(&quot;Running Iterations...&quot;)$</line>
+<line>it:10$</line>
+<line>for i:1 thru it+1 do (</line>
+<line>    err:(abs(ev(lhs(s1)-rhs(s1))) +abs(ev(lhs(s2)-rhs(s2))) + abs(ev(lhs(s3)-rhs(s3))))/3,</line>
+<line>    print(&quot;Iteration&quot;, i-1 ,&quot;-&gt;    x1=&quot;,x1,&quot;     x2=&quot;, x2,&quot;     x3=&quot;, x3, &quot;     with avg error of&quot;, err),</line>
+<line>    a:ev(rhs(s1)),</line>
+<line>    b:ev(rhs(s2)),</line>
+<line>    c:ev(rhs(s3)),</line>
+<line>    x1:a, x2:b, x3:c,</line>
+<line>    if (((abs(ev(lhs(s1)-rhs(s1))) +abs(ev(lhs(s2)-rhs(s2))) + abs(ev(lhs(s3)-rhs(s3))))/3)&gt;err) then return(&quot;The system of equations doesn&apos;t converge beyond this&quot;)</line>
+<line>) ;</line>
+</editor>
+</input>
+<output>
+<mth><st breakline="true">Original system of equations−</st><st> </st><st breakline="true">A*x=b →  </st><st> </st><tb roundedParens="true"><mtr><mtd><n>4</n></mtd><mtd><fnm>−</fnm><n>1</n></mtd><mtd><n>0</n></mtd></mtr><mtr><mtd><fnm>−</fnm><n>1</n></mtd><mtd><n>4</n></mtd><mtd><fnm>−</fnm><n>1</n></mtd></mtr><mtr><mtd><n>0</n></mtd><mtd><fnm>−</fnm><n>1</n></mtd><mtd><n>4</n></mtd></mtr></tb><st> </st><tb roundedParens="true"><mtr><mtd><v>x1</v></mtd></mtr><mtr><mtd><v>x2</v></mtd></mtr><mtr><mtd><v>x3</v></mtd></mtr></tb><fnm>=</fnm><tb roundedParens="true"><mtr><mtd><n>2</n></mtd></mtr><mtr><mtd><n>4</n></mtd></mtr><mtr><mtd><n>10</n></mtd></mtr></tb><st> </st><st breakline="true">Upon multiplication →</st><st> </st><tb roundedParens="true"><mtr><mtd><n>4</n><h>·</h><v>x1</v><fnm>−</fnm><v>x2</v></mtd></mtr><mtr><mtd><fnm>−</fnm><v>x3</v><fnm>+</fnm><n>4</n><h>·</h><v>x2</v><fnm>−</fnm><v>x1</v></mtd></mtr><mtr><mtd><n>4</n><h>·</h><v>x3</v><fnm>−</fnm><v>x2</v></mtd></mtr></tb><fnm>=</fnm><tb roundedParens="true"><mtr><mtd><n>2</n></mtd></mtr><mtr><mtd><n>4</n></mtd></mtr><mtr><mtd><n>10</n></mtd></mtr></tb><st> </st><st breakline="true">Solving for respective variables −</st><st> </st><v breakline="true">x1</v><fnm>=</fnm><f><r><v>x2</v><fnm>+</fnm><n>2</n></r><r><n>4</n></r></f><st> </st><v breakline="true">x2</v><fnm>=</fnm><f><r><v>x3</v><fnm>+</fnm><v>x1</v><fnm>+</fnm><n>4</n></r><r><n>4</n></r></f><st> </st><v breakline="true">x3</v><fnm>=</fnm><f><r><v>x2</v><fnm>+</fnm><n>10</n></r><r><n>4</n></r></f><st> </st><st breakline="true">Running Iterations...</st><st> </st><st breakline="true">Iteration</st><st> </st><n>0</n><st> </st><st>→    x1=</st><st> </st><n>0.0</n><st> </st><st>     x2=</st><st> </st><n>0.0</n><st> </st><st>     x3=</st><st> </st><n>0.0</n><st> </st><st>     with avg error of</st><st> </st><n>1.3333333333333333</n><st> </st><st breakline="true">Iteration</st><st> </st><n>1</n><st> </st><st>→    x1=</st><st> </st><n>0.5</n><st> </st><st>     x2=</st><st> </st><n>1.0</n><st> </st><st>     x3=</st><st> </st><n>2.5</n><st> </st><st>     with avg error of</st><st> </st><n>0.4166666666666667</n><st> </st><st breakline="true">Iteration</st><st> </st><n>2</n><st> </st><st>→    x1=</st><st> </st><n>0.75</n><st> </st><st>     x2=</st><st> </st><n>1.75</n><st> </st><st>     x3=</st><st> </st><n>2.75</n><st> </st><st>     with avg error of</st><st> </st><n>0.16666666666666666</n><st> </st><st breakline="true">Iteration</st><st> </st><n>3</n><st> </st><st>→    x1=</st><st> </st><n>0.9375</n><st> </st><st>     x2=</st><st> </st><n>1.875</n><st> </st><st>     x3=</st><st> </st><n>2.9375</n><st> </st><st>     with avg error of</st><st> </st><n>0.052083333333333336</n><st> </st><st breakline="true">Iteration</st><st> </st><n>4</n><st> </st><st>→    x1=</st><st> </st><n>0.96875</n><st> </st><st>     x2=</st><st> </st><n>1.96875</n><st> </st><st>     x3=</st><st> </st><n>2.96875</n><st> </st><st>     with avg error of</st><st> </st><n>0.020833333333333332</n><st> </st><st breakline="true">Iteration</st><st> </st><n>5</n><st> </st><st>→    x1=</st><st> </st><n>0.9921875</n><st> </st><st>     x2=</st><st> </st><n>1.984375</n><st> </st><st>     x3=</st><st> </st><n>2.9921875</n><st> </st><st>     with avg error of</st><st> </st><n>0.006510416666666667</n><st> </st><st breakline="true">Iteration</st><st> </st><n>6</n><st> </st><st>→    x1=</st><st> </st><n>0.99609375</n><st> </st><st>     x2=</st><st> </st><n>1.99609375</n><st> </st><st>     x3=</st><st> </st><n>2.99609375</n><st> </st><st>     with avg error of</st><st> </st><n>0.0026041666666666665</n><st> </st><st breakline="true">Iteration</st><st> </st><n>7</n><st> </st><st>→    x1=</st><st> </st><n>0.9990234375</n><st> </st><st>     x2=</st><st> </st><n>1.998046875</n><st> </st><st>     x3=</st><st> </st><n>2.9990234375</n><st> </st><st>     with avg error of</st><st> </st><n>8.138020833333334</n><h>·</h><e><r><n>10</n></r><r><n>−4</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>8</n><st> </st><st>→    x1=</st><st> </st><n>0.99951171875</n><st> </st><st>     x2=</st><st> </st><n>1.99951171875</n><st> </st><st>     x3=</st><st> </st><n>2.99951171875</n><st> </st><st>     with avg error of</st><st> </st><n>3.255208333333333</n><h>·</h><e><r><n>10</n></r><r><n>−4</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>9</n><st> </st><st>→    x1=</st><st> </st><n>0.9998779296875</n><st> </st><st>     x2=</st><st> </st><n>1.999755859375</n><st> </st><st>     x3=</st><st> </st><n>2.9998779296875</n><st> </st><st>     with avg error of</st><st> </st><n>1.0172526041666667</n><h>·</h><e><r><n>10</n></r><r><n>−4</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>10</n><st> </st><st>→    x1=</st><st> </st><n>0.99993896484375</n><st> </st><st>     x2=</st><st> </st><n>1.99993896484375</n><st> </st><st>     x3=</st><st> </st><n>2.99993896484375</n><st> </st><st>     with avg error of</st><st> </st><n>4.0690104166666664</n><h>·</h><e><r><n>10</n></r><r><n>−5</n></r></e><st> </st><lbl altCopy="(%o15)	">(%o15) </lbl><v>done</v>
+</mth></output>
+</cell>
+</fold>
+</cell>
+
+<cell type="section" sectioning_level="2">
+<editor type="section" sectioning_level="2">
+<line> Gauss Seidel</line>
+</editor>
+<fold>
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line>A: matrix(</line>
+<line>[6,3,2],</line>
+<line>[1,4,2],</line>
+<line>[2,5,9])$</line>
+<line>X:matrix([x1], [x2], [x3])$</line>
+<line>B:matrix([10], [-2], [3])$</line>
+<line>print(&quot;Original system of equations-&quot;)$</line>
+<line>print(&quot;A*x=b -&gt;  &quot;,A,X=B)$</line>
+<line>Ax:A.X$</line>
+<line>print(&quot;Upon multiplication -&gt;&quot;, Ax=B)$</line>
+<line></line>
+<line>print(&quot;Solving for respective variables -&quot;)$</line>
+<line>for i:1 thru 3 do (</line>
+<line>    a:concat(s, i),</line>
+<line>    b:(solve(Ax[i][1]=B[i][1],concat(x, i))), </line>
+<line>    a::pop(b),</line>
+<line>    print(ev(a))</line>
+<line>)$</line>
+<line>x1:0.0$ x2:0.0$ x3:0.0$</line>
+<line></line>
+<line>print(&quot;Running Iterations...&quot;)$</line>
+<line>it:28$</line>
+<line>for i:1 thru it do (</line>
+<line>    err:(abs(ev(lhs(s1)-rhs(s1))) +abs(ev(lhs(s2)-rhs(s2))) + abs(ev(lhs(s3)-rhs(s3))))/3,</line>
+<line>    print(&quot;Iteration&quot;, i ,&quot;-&gt;    x1=&quot;,x1,&quot;     x2=&quot;, x2,&quot;     x3=&quot;, x3, &quot;     with avg error of&quot;, err),</line>
+<line>    x1:ev(rhs(s1)),</line>
+<line>    x2:ev(rhs(s2)),</line>
+<line>    x3:ev(rhs(s3)),</line>
+<line>    if (((abs(ev(lhs(s1)-rhs(s1))) +abs(ev(lhs(s2)-rhs(s2))) + abs(ev(lhs(s3)-rhs(s3))))/3)&gt;err) then return(&quot;The system of equations doesn&apos;t converge beyond this&quot;)</line>
+<line>) ;</line>
+</editor>
+</input>
+<output>
+<mth><st breakline="true">Original system of equations−</st><st> </st><st breakline="true">A*x=b →  </st><st> </st><tb roundedParens="true"><mtr><mtd><n>6</n></mtd><mtd><n>3</n></mtd><mtd><n>2</n></mtd></mtr><mtr><mtd><n>1</n></mtd><mtd><n>4</n></mtd><mtd><n>2</n></mtd></mtr><mtr><mtd><n>2</n></mtd><mtd><n>5</n></mtd><mtd><n>9</n></mtd></mtr></tb><st> </st><tb roundedParens="true"><mtr><mtd><v>x1</v></mtd></mtr><mtr><mtd><v>x2</v></mtd></mtr><mtr><mtd><v>x3</v></mtd></mtr></tb><fnm>=</fnm><tb roundedParens="true"><mtr><mtd><n>10</n></mtd></mtr><mtr><mtd><fnm>−</fnm><n>2</n></mtd></mtr><mtr><mtd><n>3</n></mtd></mtr></tb><st> </st><st breakline="true">Upon multiplication →</st><st> </st><tb roundedParens="true"><mtr><mtd><n>2</n><h>·</h><v>x3</v><fnm>+</fnm><n>3</n><h>·</h><v>x2</v><fnm>+</fnm><n>6</n><h>·</h><v>x1</v></mtd></mtr><mtr><mtd><n>2</n><h>·</h><v>x3</v><fnm>+</fnm><n>4</n><h>·</h><v>x2</v><fnm>+</fnm><v>x1</v></mtd></mtr><mtr><mtd><n>9</n><h>·</h><v>x3</v><fnm>+</fnm><n>5</n><h>·</h><v>x2</v><fnm>+</fnm><n>2</n><h>·</h><v>x1</v></mtd></mtr></tb><fnm>=</fnm><tb roundedParens="true"><mtr><mtd><n>10</n></mtd></mtr><mtr><mtd><fnm>−</fnm><n>2</n></mtd></mtr><mtr><mtd><n>3</n></mtd></mtr></tb><st> </st><st breakline="true">Solving for respective variables −</st><st> </st><v breakline="true">x1</v><fnm>=</fnm><fnm>−</fnm><r><p><f><r><n>2</n><h>·</h><v>x3</v><fnm>+</fnm><n>3</n><h>·</h><v>x2</v><fnm>−</fnm><n>10</n></r><r><n>6</n></r></f></p></r><st> </st><v breakline="true">x2</v><fnm>=</fnm><fnm>−</fnm><r><p><f><r><n>2</n><h>·</h><v>x3</v><fnm>+</fnm><v>x1</v><fnm>+</fnm><n>2</n></r><r><n>4</n></r></f></p></r><st> </st><v breakline="true">x3</v><fnm>=</fnm><fnm>−</fnm><r><p><f><r><n>5</n><h>·</h><v>x2</v><fnm>+</fnm><n>2</n><h>·</h><v>x1</v><fnm>−</fnm><n>3</n></r><r><n>9</n></r></f></p></r><st> </st><st breakline="true">Running Iterations...</st><st> </st><st breakline="true">Iteration</st><st> </st><n>1</n><st> </st><st>→    x1=</st><st> </st><n>0.0</n><st> </st><st>     x2=</st><st> </st><n>0.0</n><st> </st><st>     x3=</st><st> </st><n>0.0</n><st> </st><st>     with avg error of</st><st> </st><n>0.8333333333333334</n><st> </st><st breakline="true">Iteration</st><st> </st><n>2</n><st> </st><st>→    x1=</st><st> </st><n>1.6666666666666665</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>0.9166666666666666</n><st> </st><st>     x3=</st><st> </st><n>0.4722222222222222</n><st> </st><st>     with avg error of</st><st> </st><n>0.17901234567901236</n><st> </st><st breakline="true">Iteration</st><st> </st><n>3</n><st> </st><st>→    x1=</st><st> </st><n>1.9675925925925926</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.2280092592592593</n><st> </st><st>     x3=</st><st> </st><n>0.5783179012345679</n><st> </st><st>     with avg error of</st><st> </st><n>0.05778463648834024</n><st> </st><st breakline="true">Iteration</st><st> </st><n>4</n><st> </st><st>→    x1=</st><st> </st><n>2.0878986625514404</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.3111336162551441</n><st> </st><st>     x3=</st><st> </st><n>0.5977634173525378</n><st> </st><st>     with avg error of</st><st> </st><n>0.014934365950312353</n><st> </st><st breakline="true">Iteration</st><st> </st><n>5</n><st> </st><st>→    x1=</st><st> </st><n>2.1229790023433925</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.329626459262117</n><st> </st><st>     x3=</st><st> </st><n>0.6002415879582</n><st> </st><st>     with avg error of</st><st> </st><n>0.003219816645921192</n><st> </st><st breakline="true">Iteration</st><st> </st><n>6</n><st> </st><st>→    x1=</st><st> </st><n>2.131399366978325</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.3329706357236812</n><st> </st><st>     x3=</st><st> </st><n>0.600228271629084</n><st> </st><st>     with avg error of</st><st> </st><n>5.610617239040216</n><h>·</h><e><r><n>10</n></r><r><n>−4</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>7</n><st> </st><st>→    x1=</st><st> </st><n>2.1330758939854793</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.3333831093109119</n><st> </st><st>     x3=</st><st> </st><n>0.6000848620648445</n><st> </st><st>     with avg error of</st><st> </st><n>1.0858158793839816</n><h>·</h><e><r><n>10</n></r><r><n>−4</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>8</n><st> </st><st>→    x1=</st><st> </st><n>2.1333299339671745</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.333374914524216</n><st> </st><st>     x3=</st><st> </st><n>0.6000238560763034</n><st> </st><st>     with avg error of</st><st> </st><n>1.558031014536887</n><h>·</h><e><r><n>10</n></r><r><n>−5</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>9</n><st> </st><st>→    x1=</st><st> </st><n>2.13334617190334</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.3333484710139867</n><st> </st><st>     x3=</st><st> </st><n>0.6000055568070282</n><st> </st><st>     with avg error of</st><st> </st><n>5.423877775726875</n><h>·</h><e><r><n>10</n></r><r><n>−6</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>10</n><st> </st><st>→    x1=</st><st> </st><n>2.1333390499046505</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.3333375408796768</n><st> </st><st>     x3=</st><st> </st><n>0.6000010671765648</n><st> </st><st>     with avg error of</st><st> </st><n>2.071112966313867</n><h>·</h><e><r><n>10</n></r><r><n>−6</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>11</n><st> </st><st>→    x1=</st><st> </st><n>2.1333350813809835</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.3333343039335284</n><st> </st><st>     x3=</st><st> </st><n>0.6000001507672971</n><st> </st><st>     with avg error of</st><st> </st><n>5.904026508426105</n><h>·</h><e><r><n>10</n></r><r><n>−7</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>12</n><st> </st><st>→    x1=</st><st> </st><n>2.133333768377665</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.3333335174780647</n><st> </st><st>     x3=</st><st> </st><n>0.6000000056261103</n><st> </st><st>     with avg error of</st><st> </st><n>1.3913930992555853</n><h>·</h><e><r><n>10</n></r><r><n>−7</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>13</n><st> </st><st>→    x1=</st><st> </st><n>2.1333334235303285</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.3333333586956373</n><st> </st><st>     x3=</st><st> </st><n>0.5999999940463921</n><st> </st><st>     with avg error of</st><st> </st><n>2.7107055489139498</n><h>·</h><e><r><n>10</n></r><r><n>−8</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>14</n><st> </st><st>→    x1=</st><st> </st><n>2.133333347999021</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.3333333340229514</n><st> </st><st>     x3=</st><st> </st><n>0.5999999971240794</n><st> </st><st>     with avg error of</st><st> </st><n>4.967027307974566</n><h>·</h><e><r><n>10</n></r><r><n>−9</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>15</n><st> </st><st>→    x1=</st><st> </st><n>2.1333333346367827</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.3333333322212353</n><st> </st><st>     x3=</st><st> </st><n>0.5999999990925123</n><st> </st><st>     with avg error of</st><st> </st><n>8.470730043323252</n><h>·</h><e><r><n>10</n></r><r><n>−10</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>16</n><st> </st><st>→    x1=</st><st> </st><n>2.13333333307978</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.3333333328162011</n><st> </st><st>     x3=</st><st> </st><n>0.5999999997690494</n><st> </st><st>     with avg error of</st><st> </st><n>1.3674646600255377</n><h>·</h><e><r><n>10</n></r><r><n>−10</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>17</n><st> </st><st>→    x1=</st><st> </st><n>2.133333333151751</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.3333333331724624</n><st> </st><st>     x3=</st><st> </st><n>0.5999999999509789</n><st> </st><st>     with avg error of</st><st> </st><n>6.94840481448485</n><h>·</h><e><r><n>10</n></r><r><n>−11</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>18</n><st> </st><st>→    x1=</st><st> </st><n>2.1333333332692384</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.333333333292799</n><st> </st><st>     x3=</st><st> </st><n>0.5999999999917243</n><st> </st><st>     with avg error of</st><st> </st><n>2.2319701642459222</n><h>·</h><e><r><n>10</n></r><r><n>−11</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>19</n><st> </st><st>→    x1=</st><st> </st><n>2.1333333333158246</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.3333333333248185</n><st> </st><st>     x3=</st><st> </st><n>0.5999999999991603</n><st> </st><st>     with avg error of</st><st> </st><n>5.749622999928761</n><h>·</h><e><r><n>10</n></r><r><n>−12</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>20</n><st> </st><st>→    x1=</st><st> </st><n>2.1333333333293556</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.333333333331919</n><st> </st><st>     x3=</st><st> </st><n>0.6000000000000982</n><st> </st><st>     with avg error of</st><st> </st><n>1.235604211539491</n><h>·</h><e><r><n>10</n></r><r><n>−12</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>21</n><st> </st><st>→    x1=</st><st> </st><n>2.1333333333325935</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.3333333333331976</n><st> </st><st>     x3=</st><st> </st><n>0.6000000000000889</n><st> </st><st>     with avg error of</st><st> </st><n>2.156053113822054</n><h>·</h><e><r><n>10</n></r><r><n>−13</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>22</n><st> </st><st>→    x1=</st><st> </st><n>2.1333333333332356</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.3333333333333532</n><st> </st><st>     x3=</st><st> </st><n>0.6000000000000327</n><st> </st><st>     with avg error of</st><st> </st><n>4.167037085759754</n><h>·</h><e><r><n>10</n></r><r><n>−14</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>23</n><st> </st><st>→    x1=</st><st> </st><n>2.1333333333333324</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.3333333333333495</n><st> </st><st>     x3=</st><st> </st><n>0.6000000000000092</n><st> </st><st>     with avg error of</st><st> </st><n>5.773159728050814</n><h>·</h><e><r><n>10</n></r><r><n>−15</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>24</n><st> </st><st>→    x1=</st><st> </st><n>2.133333333333338</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.3333333333333393</n><st> </st><st>     x3=</st><st> </st><n>0.6000000000000022</n><st> </st><st>     with avg error of</st><st> </st><n>2.0724163126336257</n><h>·</h><e><r><n>10</n></r><r><n>−15</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>25</n><st> </st><st>→    x1=</st><st> </st><n>2.1333333333333355</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.333333333333335</n><st> </st><st>     x3=</st><st> </st><n>0.6000000000000004</n><st> </st><st>     with avg error of</st><st> </st><n>8.881784197001252</n><h>·</h><e><r><n>10</n></r><r><n>−16</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>26</n><st> </st><st>→    x1=</st><st> </st><n>2.1333333333333337</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.3333333333333337</n><st> </st><st>     x3=</st><st> </st><n>0.6000000000000001</n><st> </st><st>     with avg error of</st><st> </st><n>2.220446049250313</n><h>·</h><e><r><n>10</n></r><r><n>−16</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>27</n><st> </st><st>→    x1=</st><st> </st><n>2.1333333333333333</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.3333333333333333</n><st> </st><st>     x3=</st><st> </st><n>0.5999999999999999</n><st> </st><st>     with avg error of</st><st> </st><n>7.401486830834377</n><h>·</h><e><r><n>10</n></r><r><n>−17</n></r></e><st> </st><st breakline="true">Iteration</st><st> </st><n>28</n><st> </st><st>→    x1=</st><st> </st><n>2.1333333333333333</n><st> </st><st>     x2=</st><st> </st><fnm>−</fnm><n>1.333333333333333</n><st> </st><st>     x3=</st><st> </st><n>0.5999999999999998</n><st> </st><st>     with avg error of</st><st> </st><n>0.0</n><st> </st><lbl altCopy="(%o15)	">(%o15) </lbl><v>done</v>
+</mth></output>
+</cell>
+</fold>
+</cell>
+
+<cell type="section" sectioning_level="2">
+<editor type="section" sectioning_level="2">
+<line>Lagrange Polynomial Interpolation</line>
+</editor>
+<fold>
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line>&apos;X=xlist:[3,4,5,6,8,10];</line>
+<line>&apos;Y=ylist:[-25,5,20,18,3,9];</line>
+<line></line>
+<line>func:0$ n:length(xlist)$</line>
+<line>for j:1 thru n do(</line>
+<line>    b: ylist[j],</line>
+<line>    for k:1 thru n do(</line>
+<line>        if k#j then b:b*((x-xlist[k])/(xlist[j]-xlist[k]))),</line>
+<line>    func:func+b)$</line>
+<line>func:expand(func)$</line>
+<line>f(x):=&apos;&apos;func;</line>
+<line>wxplot2d([f(x), [discrete, xlist, ylist]], [x, lmin(xlist)-1, lmax(xlist)+1], [style,lines, points], [point_type, box]);</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o1)	">(%o1) </lbl><v>X</v><fnm>=</fnm><r list="true"><t listdelim="true">[</t><n>3</n><fnm>,</fnm><n>4</n><fnm>,</fnm><n>5</n><fnm>,</fnm><n>6</n><fnm>,</fnm><n>8</n><fnm>,</fnm><n>10</n><t listdelim="true">]</t></r><lbl altCopy="(%o2)	">(%o2) </lbl><v>Y</v><fnm>=</fnm><r list="true"><t listdelim="true">[</t><fnm>−</fnm><n>25</n><fnm>,</fnm><n>5</n><fnm>,</fnm><n>20</n><fnm>,</fnm><n>18</n><fnm>,</fnm><n>3</n><fnm>,</fnm><n>9</n><t listdelim="true">]</t></r><lbl altCopy="(%o7)	">(%o7) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><fnm>−</fnm><r><p><f><r><n>127</n><h>·</h><e><r><v>x</v></r><r><n>5</n></r></e></r><r><n>1680</n></r></f></p></r><fnm>+</fnm><f><r><n>1987</n><h>·</h><e><r><v>x</v></r><r><n>4</n></r></e></r><r><n>840</n></r></f><fnm>−</fnm><f><r><n>46057</n><h>·</h><e><r><v>x</v></r><r><n>3</n></r></e></r><r><n>1680</n></r></f><fnm>+</fnm><f><r><n>119213</n><h>·</h><e><r><v>x</v></r><r><n>2</n></r></e></r><r><n>840</n></r></f><fnm>−</fnm><f><r><n>31921</n><h>·</h><v>x</v></r><r><n>105</n></r></f><fnm>+</fnm><f><r><n>1237</n></r><r><n>7</n></r></f><lbl altCopy="(%t8)	">(%t8) </lbl><img ppi="120">image18.png</img><lbl altCopy="(%o8)	">(%o8) </lbl><fnm></fnm>
+</mth></output>
+</cell>
+
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line>&apos;X=xlist:[8,5,14,3,9];</line>
+<line>&apos;Y=ylist:[0,-3,6,4,9];</line>
+<line></line>
+<line>func:0$ n:length(xlist)$</line>
+<line>for j:1 thru n do(</line>
+<line>    b: ylist[j],</line>
+<line>    for k:1 thru n do(</line>
+<line>        if k#j then b:b*((x-xlist[k])/(xlist[j]-xlist[k]))),</line>
+<line>    func:func+b)$</line>
+<line>func:expand(func)$</line>
+<line>f(x):=&apos;&apos;func;</line>
+<line>wxplot2d([f(x), [discrete, xlist, ylist]], [x, lmin(xlist)-1, lmax(xlist)+1], [style,lines, points], [point_type, box]);</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o1)	">(%o1) </lbl><v>X</v><fnm>=</fnm><r list="true"><t listdelim="true">[</t><n>8</n><fnm>,</fnm><n>5</n><fnm>,</fnm><n>14</n><fnm>,</fnm><n>3</n><fnm>,</fnm><n>9</n><t listdelim="true">]</t></r><lbl altCopy="(%o2)	">(%o2) </lbl><v>Y</v><fnm>=</fnm><r list="true"><t listdelim="true">[</t><n>0</n><fnm>,</fnm><fnm>−</fnm><n>3</n><fnm>,</fnm><n>6</n><fnm>,</fnm><n>4</n><fnm>,</fnm><n>9</n><t listdelim="true">]</t></r><lbl altCopy="(%o7)	">(%o7) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><fnm>−</fnm><r><p><f><r><n>7</n><h>·</h><e><r><v>x</v></r><r><n>4</n></r></e></r><r><n>132</n></r></f></p></r><fnm>+</fnm><f><r><n>83</n><h>·</h><e><r><v>x</v></r><r><n>3</n></r></e></r><r><n>55</n></r></f><fnm>−</fnm><f><r><n>3049</n><h>·</h><e><r><v>x</v></r><r><n>2</n></r></e></r><r><n>220</n></r></f><fnm>+</fnm><f><r><n>15791</n><h>·</h><v>x</v></r><r><n>330</n></r></f><fnm>−</fnm><f><r><n>564</n></r><r><n>11</n></r></f><lbl altCopy="(%t8)	">(%t8) </lbl><img ppi="120">image19.png</img><lbl altCopy="(%o8)	">(%o8) </lbl><fnm></fnm>
+</mth></output>
+</cell>
+
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line>&apos;X=xlist:[-1,1,4,7,8, 10];</line>
+<line>&apos;Y=ylist:[-2,0,63,342,50, 22];</line>
+<line></line>
+<line>func:0$ n:length(xlist)$</line>
+<line>for j:1 thru n do(</line>
+<line>    b: ylist[j],</line>
+<line>    for k:1 thru n do(</line>
+<line>        if k#j then b:b*((x-xlist[k])/(xlist[j]-xlist[k]))),</line>
+<line>    func:func+b)$</line>
+<line>func:expand(func)$</line>
+<line>f(x):=&apos;&apos;func;</line>
+<line>wxplot2d([f(x), [discrete, xlist, ylist]], [x, lmin(xlist)-1, lmax(xlist)+1], [style,lines, points], [point_type, box]);</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o1)	">(%o1) </lbl><v>X</v><fnm>=</fnm><r list="true"><t listdelim="true">[</t><fnm>−</fnm><n>1</n><fnm>,</fnm><n>1</n><fnm>,</fnm><n>4</n><fnm>,</fnm><n>7</n><fnm>,</fnm><n>8</n><fnm>,</fnm><n>10</n><t listdelim="true">]</t></r><lbl altCopy="(%o2)	">(%o2) </lbl><v>Y</v><fnm>=</fnm><r list="true"><t listdelim="true">[</t><fnm>−</fnm><n>2</n><fnm>,</fnm><n>0</n><fnm>,</fnm><n>63</n><fnm>,</fnm><n>342</n><fnm>,</fnm><n>50</n><fnm>,</fnm><n>22</n><t listdelim="true">]</t></r><lbl altCopy="(%o7)	">(%o7) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><f><r><n>31961</n><h>·</h><e><r><v>x</v></r><r><n>5</n></r></e></r><r><n>49896</n></r></f><fnm>−</fnm><f><r><n>99791</n><h>·</h><e><r><v>x</v></r><r><n>4</n></r></e></r><r><n>7128</n></r></f><fnm>+</fnm><f><r><n>4729469</n><h>·</h><e><r><v>x</v></r><r><n>3</n></r></e></r><r><n>49896</n></r></f><fnm>−</fnm><f><r><n>1288073</n><h>·</h><e><r><v>x</v></r><r><n>2</n></r></e></r><r><n>7128</n></r></f><fnm>−</fnm><f><r><n>2355767</n><h>·</h><v>x</v></r><r><n>24948</n></r></f><fnm>+</fnm><f><r><n>172592</n></r><r><n>891</n></r></f><lbl altCopy="(%t8)	">(%t8) </lbl><img ppi="120">image20.png</img><lbl altCopy="(%o8)	">(%o8) </lbl><fnm></fnm>
+</mth></output>
+</cell>
+</fold>
+</cell>
+
+<cell type="section" sectioning_level="2">
+<editor type="section" sectioning_level="2">
+<line>Newton&apos;s Divided Difference Polynomial Interpolation</line>
+</editor>
+<fold>
+<cell type="subsection" sectioning_level="3">
+<editor type="subsection" sectioning_level="3">
+<line>With Divided Difference table</line>
+</editor>
+<fold>
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line>X:[0,10,20,30,40,50]$</line>
+<line>Y:[9,12,20,17,37,42]$ </line>
+<line></line>
+<line>n:length(X)$</line>
+<line>g(a, b):= if a+1=b then block( ev((Y[b]-Y[a])/(X[b]-X[a])) )</line>
+<line>                else block( ev((g(a+1, b)-g(a, b-1))/(X[b]-X[a])) )$</line>
+<line>Dd: matrix(X, Y)$</line>
+<line>for i:1 thru n-1 do (c:makelist(g(a, a+i), a, n-i), for s:1 thru i do(c:endcons(&quot;-&quot;, c)), Dd:addrow(Dd, c))$</line>
+<line>&apos;Divided_Difference_Table=Dd:transpose(Dd);</line>
+<line>func:Y[1]$</line>
+<line>for i:2 thru n do(</line>
+<line>    L:g(1, i), </line>
+<line>    for j:1 thru i-1 do (L:L*(x-X[j])),</line>
+<line>    func:func+L)$</line>
+<line>func:expand(func)$</line>
+<line>f(x):=&apos;&apos;func;</line>
+<line>wxplot2d([f(x), [discrete, X, Y]], [x, lmin(X)-1, lmax(X)+1], [style,lines, points], [point_type, box]);</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o7)	">(%o7) </lbl><v>Divided_Difference_Table</v><fnm>=</fnm><tb roundedParens="true"><mtr><mtd><n>0</n></mtd><mtd><n>9</n></mtd><mtd><f><r><n>3</n></r><r><n>10</n></r></f></mtd><mtd><f><r><n>1</n></r><r><n>40</n></r></f></mtd><mtd><fnm>−</fnm><r><p><f><r><n>1</n></r><r><n>375</n></r></f></p></r></mtd><mtd><f><r><n>1</n></r><r><n>4800</n></r></f></mtd><mtd><fnm>−</fnm><r><p><f><r><n>61</n></r><r><n>6000000</n></r></f></p></r></mtd></mtr><mtr><mtd><n>10</n></mtd><mtd><n>12</n></mtd><mtd><f><r><n>4</n></r><r><n>5</n></r></f></mtd><mtd><fnm>−</fnm><r><p><f><r><n>11</n></r><r><n>200</n></r></f></p></r></mtd><mtd><f><r><n>17</n></r><r><n>3000</n></r></f></mtd><mtd><fnm>−</fnm><r><p><f><r><n>3</n></r><r><n>10000</n></r></f></p></r></mtd><mtd><st>−</st></mtd></mtr><mtr><mtd><n>20</n></mtd><mtd><n>20</n></mtd><mtd><fnm>−</fnm><r><p><f><r><n>3</n></r><r><n>10</n></r></f></p></r></mtd><mtd><f><r><n>23</n></r><r><n>200</n></r></f></mtd><mtd><fnm>−</fnm><r><p><f><r><n>19</n></r><r><n>3000</n></r></f></p></r></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd></mtr><mtr><mtd><n>30</n></mtd><mtd><n>17</n></mtd><mtd><n>2</n></mtd><mtd><fnm>−</fnm><r><p><f><r><n>3</n></r><r><n>40</n></r></f></p></r></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd></mtr><mtr><mtd><n>40</n></mtd><mtd><n>37</n></mtd><mtd><f><r><n>1</n></r><r><n>2</n></r></f></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd></mtr><mtr><mtd><n>50</n></mtd><mtd><n>42</n></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd></mtr></tb><lbl altCopy="(%o11)	">(%o11) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><fnm>−</fnm><r><p><f><r><n>61</n><h>·</h><e><r><v>x</v></r><r><n>5</n></r></e></r><r><n>6000000</n></r></f></p></r><fnm>+</fnm><f><r><n>49</n><h>·</h><e><r><v>x</v></r><r><n>4</n></r></e></r><r><n>40000</n></r></f><fnm>−</fnm><f><r><n>203</n><h>·</h><e><r><v>x</v></r><r><n>3</n></r></e></r><r><n>4000</n></r></f><fnm>+</fnm><f><r><n>337</n><h>·</h><e><r><v>x</v></r><r><n>2</n></r></e></r><r><n>400</n></r></f><fnm>−</fnm><f><r><n>313</n><h>·</h><v>x</v></r><r><n>75</n></r></f><fnm>+</fnm><n>9</n><lbl altCopy="(%t12)	">(%t12) </lbl><img ppi="120">image21.png</img><lbl altCopy="(%o12)	">(%o12) </lbl><fnm></fnm>
+</mth></output>
+</cell>
+
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line>X:[1811,1821,1831,1841,1851,1861]$</line>
+<line>Y:[9,12,20,17,37,42]$ </line>
+<line></line>
+<line>n:length(X)$</line>
+<line>g(a, b):= if a+1=b then block( ev((Y[b]-Y[a])/(X[b]-X[a])) )</line>
+<line>                else block( ev((g(a+1, b)-g(a, b-1))/(X[b]-X[a])) )$</line>
+<line>Dd: matrix(X, Y)$</line>
+<line>for i:1 thru n-1 do (c:makelist(g(a, a+i), a, n-i), for s:1 thru i do(c:endcons(&quot;-&quot;, c)), Dd:addrow(Dd, c))$</line>
+<line>&apos;Divided_Difference_Table=Dd:transpose(Dd);</line>
+<line>func:Y[1]$</line>
+<line>for i:2 thru n do(</line>
+<line>    L:g(1, i), </line>
+<line>    for j:1 thru i-1 do (L:L*(x-X[j])),</line>
+<line>    func:func+L)$</line>
+<line>func:expand(func)$</line>
+<line>f(x):=&apos;&apos;func;</line>
+<line>wxplot2d([f(x), [discrete, X, Y]], [x, lmin(X)-1, lmax(X)+1], [style,lines, points], [point_type, box]);</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o7)	">(%o7) </lbl><v>Divided_Difference_Table</v><fnm>=</fnm><tb roundedParens="true"><mtr><mtd><n>1811</n></mtd><mtd><n>9</n></mtd><mtd><f><r><n>3</n></r><r><n>10</n></r></f></mtd><mtd><f><r><n>1</n></r><r><n>40</n></r></f></mtd><mtd><fnm>−</fnm><r><p><f><r><n>1</n></r><r><n>375</n></r></f></p></r></mtd><mtd><f><r><n>1</n></r><r><n>4800</n></r></f></mtd><mtd><fnm>−</fnm><r><p><f><r><n>61</n></r><r><n>6000000</n></r></f></p></r></mtd></mtr><mtr><mtd><n>1821</n></mtd><mtd><n>12</n></mtd><mtd><f><r><n>4</n></r><r><n>5</n></r></f></mtd><mtd><fnm>−</fnm><r><p><f><r><n>11</n></r><r><n>200</n></r></f></p></r></mtd><mtd><f><r><n>17</n></r><r><n>3000</n></r></f></mtd><mtd><fnm>−</fnm><r><p><f><r><n>3</n></r><r><n>10000</n></r></f></p></r></mtd><mtd><st>−</st></mtd></mtr><mtr><mtd><n>1831</n></mtd><mtd><n>20</n></mtd><mtd><fnm>−</fnm><r><p><f><r><n>3</n></r><r><n>10</n></r></f></p></r></mtd><mtd><f><r><n>23</n></r><r><n>200</n></r></f></mtd><mtd><fnm>−</fnm><r><p><f><r><n>19</n></r><r><n>3000</n></r></f></p></r></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd></mtr><mtr><mtd><n>1841</n></mtd><mtd><n>17</n></mtd><mtd><n>2</n></mtd><mtd><fnm>−</fnm><r><p><f><r><n>3</n></r><r><n>40</n></r></f></p></r></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd></mtr><mtr><mtd><n>1851</n></mtd><mtd><n>37</n></mtd><mtd><f><r><n>1</n></r><r><n>2</n></r></f></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd></mtr><mtr><mtd><n>1861</n></mtd><mtd><n>42</n></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd></mtr></tb><lbl altCopy="(%o11)	">(%o11) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><fnm>−</fnm><r><p><f><r><n>61</n><h>·</h><e><r><v>x</v></r><r><n>5</n></r></e></r><r><n>6000000</n></r></f></p></r><fnm>+</fnm><f><r><n>111941</n><h>·</h><e><r><v>x</v></r><r><n>4</n></r></e></r><r><n>1200000</n></r></f><fnm>−</fnm><f><r><n>205417771</n><h>·</h><e><r><v>x</v></r><r><n>3</n></r></e></r><r><n>600000</n></r></f><fnm>+</fnm><f><r><n>376943568551</n><h>·</h><e><r><v>x</v></r><r><n>2</n></r></e></r><r><n>600000</n></r></f><fnm>−</fnm><f><r><n>691678331403281</n><h>·</h><v>x</v></r><r><n>1200000</n></r></f><fnm>+</fnm><f><r><n>423058346586982987</n></r><r><n>2000000</n></r></f><lbl altCopy="(%t12)	">(%t12) </lbl><img ppi="120">image22.png</img><lbl altCopy="(%o12)	">(%o12) </lbl><fnm></fnm>
+</mth></output>
+</cell>
+
+<cell type="code">
+<input>
+<editor type="input">
+<line>f(1848)-f(1846), numer;</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o1)	">(%o1) </lbl><fn><r><fnm>f</fnm></r><r><p><n>1848</n></p></r></fn><fnm>−</fnm><fn><r><fnm>f</fnm></r><r><p><n>1846</n></p></r></fn>
+</mth></output>
+</cell>
+
+<cell type="code">
+<input>
+<editor type="input">
+<line>f(37)-f(35), numer;</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o17)	">(%o17) </lbl><n>4.79693299999974</n>
+</mth></output>
+</cell>
+
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line>X:[1, 2, 4, 5, 7, 8, 9, 10]$</line>
+<line>Y:[4, 6, 1, 17, 20, 14, 15, 0]$ </line>
+<line></line>
+<line>n:length(X)$</line>
+<line>g(a, b):= if a+1=b then block( ev((Y[b]-Y[a])/(X[b]-X[a])) )</line>
+<line>                else block( ev((g(a+1, b)-g(a, b-1))/(X[b]-X[a])) )$</line>
+<line>Dd: matrix(X, Y)$</line>
+<line>for i:1 thru n-1 do (c:makelist(g(a, a+i), a, n-i), for s:1 thru i do(c:endcons(&quot;-&quot;, c)), Dd:addrow(Dd, c))$</line>
+<line>&apos;Divided_Difference_Table=Dd:transpose(Dd);</line>
+<line>func:Y[1]$</line>
+<line>for i:2 thru n do(</line>
+<line>    L:g(1, i), </line>
+<line>    for j:1 thru i-1 do (L:L*(x-X[j])),</line>
+<line>    func:func+L)$</line>
+<line>func:expand(func)$</line>
+<line>f(x):=&apos;&apos;func;</line>
+<line>wxplot2d([f(x), [discrete, X, Y]], [x, lmin(X)-1, lmax(X)+1], [style,lines, points], [point_type, box]);</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o7)	">(%o7) </lbl><v>Divided_Difference_Table</v><fnm>=</fnm><tb roundedParens="true"><mtr><mtd><n>1</n></mtd><mtd><n>4</n></mtd><mtd><n>2</n></mtd><mtd><fnm>−</fnm><r><p><f><r><n>3</n></r><r><n>2</n></r></f></p></r></mtd><mtd><f><r><n>23</n></r><r><n>12</n></r></f></mtd><mtd><fnm>−</fnm><r><p><f><r><n>247</n></r><r><n>360</n></r></f></p></r></mtd><mtd><f><r><n>23</n></r><r><n>140</n></r></f></mtd><mtd><fnm>−</fnm><r><p><f><r><n>103</n></r><r><n>4032</n></r></f></p></r></mtd><mtd><f><r><n>13</n></r><r><n>25920</n></r></f></mtd></mtr><mtr><mtd><n>2</n></mtd><mtd><n>6</n></mtd><mtd><fnm>−</fnm><r><p><f><r><n>5</n></r><r><n>2</n></r></f></p></r></mtd><mtd><f><r><n>37</n></r><r><n>6</n></r></f></mtd><mtd><fnm>−</fnm><r><p><f><r><n>11</n></r><r><n>5</n></r></f></p></r></mtd><mtd><f><r><n>167</n></r><r><n>360</n></r></f></mtd><mtd><fnm>−</fnm><r><p><f><r><n>101</n></r><r><n>2520</n></r></f></p></r></mtd><mtd><fnm>−</fnm><r><p><f><r><n>53</n></r><r><n>2520</n></r></f></p></r></mtd><mtd><st>−</st></mtd></mtr><mtr><mtd><n>4</n></mtd><mtd><n>1</n></mtd><mtd><n>16</n></mtd><mtd><fnm>−</fnm><r><p><f><r><n>29</n></r><r><n>6</n></r></f></p></r></mtd><mtd><f><r><n>7</n></r><r><n>12</n></r></f></mtd><mtd><f><r><n>11</n></r><r><n>60</n></r></f></mtd><mtd><fnm>−</fnm><r><p><f><r><n>5</n></r><r><n>24</n></r></f></p></r></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd></mtr><mtr><mtd><n>5</n></mtd><mtd><n>17</n></mtd><mtd><f><r><n>3</n></r><r><n>2</n></r></f></mtd><mtd><fnm>−</fnm><r><p><f><r><n>5</n></r><r><n>2</n></r></f></p></r></mtd><mtd><f><r><n>3</n></r><r><n>2</n></r></f></mtd><mtd><fnm>−</fnm><r><p><f><r><n>16</n></r><r><n>15</n></r></f></p></r></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd></mtr><mtr><mtd><n>7</n></mtd><mtd><n>20</n></mtd><mtd><fnm>−</fnm><n>6</n></mtd><mtd><f><r><n>7</n></r><r><n>2</n></r></f></mtd><mtd><fnm>−</fnm><r><p><f><r><n>23</n></r><r><n>6</n></r></f></p></r></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd></mtr><mtr><mtd><n>8</n></mtd><mtd><n>14</n></mtd><mtd><n>1</n></mtd><mtd><fnm>−</fnm><n>8</n></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd></mtr><mtr><mtd><n>9</n></mtd><mtd><n>15</n></mtd><mtd><fnm>−</fnm><n>15</n></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd></mtr><mtr><mtd><n>10</n></mtd><mtd><n>0</n></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd><mtd><st>−</st></mtd></mtr></tb><lbl altCopy="(%o11)	">(%o11) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><f><r><n>13</n><h>·</h><e><r><v>x</v></r><r><n>7</n></r></e></r><r><n>25920</n></r></f><fnm>−</fnm><f><r><n>293</n><h>·</h><e><r><v>x</v></r><r><n>6</n></r></e></r><r><n>6720</n></r></f><fnm>+</fnm><f><r><n>67667</n><h>·</h><e><r><v>x</v></r><r><n>5</n></r></e></r><r><n>60480</n></r></f><fnm>−</fnm><f><r><n>52897</n><h>·</h><e><r><v>x</v></r><r><n>4</n></r></e></r><r><n>4032</n></r></f><fnm>+</fnm><f><r><n>1188757</n><h>·</h><e><r><v>x</v></r><r><n>3</n></r></e></r><r><n>15120</n></r></f><fnm>−</fnm><f><r><n>1204799</n><h>·</h><e><r><v>x</v></r><r><n>2</n></r></e></r><r><n>5040</n></r></f><fnm>+</fnm><f><r><n>945701</n><h>·</h><v>x</v></r><r><n>2835</n></r></f><fnm>−</fnm><f><r><n>1414</n></r><r><n>9</n></r></f><lbl altCopy="(%t12)	">(%t12) </lbl><img ppi="120">image23.png</img><lbl altCopy="(%o12)	">(%o12) </lbl><fnm></fnm>
+</mth></output>
+</cell>
+</fold>
+</cell>
+
+<cell type="subsection" sectioning_level="3">
+<editor type="subsection" sectioning_level="3">
+<line>w/o Divided Difference</line>
+</editor>
+<fold>
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line>X:[5, 7, 8, 9, 10]$</line>
+<line>Y:[17, 20, 14, 15, 0]$ </line>
+<line></line>
+<line>n:length(X)$</line>
+<line>g(a, b):= if a+1=b then block( ev((Y[b]-Y[a])/(X[b]-X[a])) )</line>
+<line>                else block( ev((g(a+1, b)-g(a, b-1))/(X[b]-X[a])) )$</line>
+<line>func:Y[1]$</line>
+<line>for i:2 thru n do(</line>
+<line>    L:g(1, i), </line>
+<line>    for j:1 thru i-1 do (L:L*(x-X[j])),</line>
+<line>    func:func+L)$</line>
+<line>func:expand(func)$</line>
+<line>f(x):=&apos;&apos;func;</line>
+<line>wxplot2d([f(x), [discrete, X, Y]], [x, lmin(X)-1, lmax(X)+1], [style,lines, points], [point_type, box]);</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o8)	">(%o8) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><fnm>−</fnm><r><p><f><r><n>16</n><h>·</h><e><r><v>x</v></r><r><n>4</n></r></e></r><r><n>15</n></r></f></p></r><fnm>+</fnm><f><r><n>973</n><h>·</h><e><r><v>x</v></r><r><n>3</n></r></e></r><r><n>30</n></r></f><fnm>−</fnm><f><r><n>10927</n><h>·</h><e><r><v>x</v></r><r><n>2</n></r></e></r><r><n>30</n></r></f><fnm>+</fnm><f><r><n>26764</n><h>·</h><v>x</v></r><r><n>15</n></r></f><fnm>−</fnm><n>3186</n><lbl altCopy="(%t9)	">(%t9) </lbl><img ppi="120">image24.png</img><lbl altCopy="(%o9)	">(%o9) </lbl><fnm></fnm>
+</mth></output>
+</cell>
+
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line>X:[1, 2, 4, 5, 7, 8, 9, 10]$</line>
+<line>Y:[4, 6, 1, 17, 20, 14, 15, 0]$ </line>
+<line></line>
+<line>n:length(X)$</line>
+<line>g(a, b):= if a+1=b then block( ev((Y[b]-Y[a])/(X[b]-X[a])) )</line>
+<line>                else block( ev((g(a+1, b)-g(a, b-1))/(X[b]-X[a])) )$</line>
+<line>func:Y[1]$</line>
+<line>for i:2 thru n do(</line>
+<line>    L:g(1, i), </line>
+<line>    for j:1 thru i-1 do (L:L*(x-X[j])),</line>
+<line>    func:func+L)$</line>
+<line>func:expand(func)$</line>
+<line>f(x):=&apos;&apos;func;</line>
+<line>wxplot2d([f(x), [discrete, X, Y]], [x, lmin(X)-1, lmax(X)+1], [style,lines, points], [point_type, box]);</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o8)	">(%o8) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><f><r><n>13</n><h>·</h><e><r><v>x</v></r><r><n>7</n></r></e></r><r><n>25920</n></r></f><fnm>−</fnm><f><r><n>293</n><h>·</h><e><r><v>x</v></r><r><n>6</n></r></e></r><r><n>6720</n></r></f><fnm>+</fnm><f><r><n>67667</n><h>·</h><e><r><v>x</v></r><r><n>5</n></r></e></r><r><n>60480</n></r></f><fnm>−</fnm><f><r><n>52897</n><h>·</h><e><r><v>x</v></r><r><n>4</n></r></e></r><r><n>4032</n></r></f><fnm>+</fnm><f><r><n>1188757</n><h>·</h><e><r><v>x</v></r><r><n>3</n></r></e></r><r><n>15120</n></r></f><fnm>−</fnm><f><r><n>1204799</n><h>·</h><e><r><v>x</v></r><r><n>2</n></r></e></r><r><n>5040</n></r></f><fnm>+</fnm><f><r><n>945701</n><h>·</h><v>x</v></r><r><n>2835</n></r></f><fnm>−</fnm><f><r><n>1414</n></r><r><n>9</n></r></f><lbl altCopy="(%t9)	">(%t9) </lbl><img ppi="120">image25.png</img><lbl altCopy="(%o9)	">(%o9) </lbl><fnm></fnm>
+</mth></output>
+</cell>
+</fold>
+</cell>
+</fold>
+</cell>
+
+<cell type="section" sectioning_level="2">
+<editor type="section" sectioning_level="2">
+<line>Trapezoidal Rule</line>
+</editor>
+<fold>
+<cell type="code">
+<input>
+<editor type="input">
+<line>f(x):= cos(x);</line>
+<line>[a, b]:[0, %pi/2]$</line>
+<line>h:b-a$</line>
+<line>&apos;Area=(h/2)*(f(a)+f(b)), numer;</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o10)	">(%o10) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><fn><r><fnm>cos</fnm></r><r><p><v>x</v></p></r></fn><lbl altCopy="(%o13)	">(%o13) </lbl><v>Area</v><fnm>=</fnm><n>0.7853981633974483</n>
+</mth></output>
+</cell>
+
+<cell type="code">
+<input>
+<editor type="input">
+<line>f(x):= 3*x^2;</line>
+<line>[a, b]:[0, 10]$</line>
+<line>h:b-a$</line>
+<line>&apos;Area=(h/2)*(f(a)+f(b)), numer;</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o14)	">(%o14) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><n>3</n><h>·</h><e><r><v>x</v></r><r><n>2</n></r></e><lbl altCopy="(%o17)	">(%o17) </lbl><v>Area</v><fnm>=</fnm><n>1500</n>
+</mth></output>
+</cell>
+
+<cell type="code">
+<input>
+<editor type="input">
+<line>f(x):= sin(x);</line>
+<line>[a, b]:[0, 1]$</line>
+<line>h:b-a$</line>
+<line>&apos;Area=(h/2)*(f(a)+f(b)), numer;</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o18)	">(%o18) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><fn><r><fnm>sin</fnm></r><r><p><v>x</v></p></r></fn><lbl altCopy="(%o21)	">(%o21) </lbl><v>Area</v><fnm>=</fnm><n>0.42073549240394825</n>
+</mth></output>
+</cell>
+</fold>
+</cell>
+
+<cell type="section" sectioning_level="2">
+<editor type="section" sectioning_level="2">
+<line>Simpsons</line>
+</editor>
+<fold>
+<cell type="subsection" sectioning_level="3">
+<editor type="subsection" sectioning_level="3">
+<line>simpsons 1/3 rule</line>
+</editor>
+<fold>
+<cell type="code">
+<input>
+<editor type="input">
+<line>f(x):= x^2+5;</line>
+<line>[a, b]:[1, 5]$</line>
+<line>h:(b-a)/2$</line>
+<line>c:a+h$</line>
+<line>&apos;Area=(h/3)*(f(a)+4*f(c)+f(b)), numer ;</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o22)	">(%o22) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><e><r><v>x</v></r><r><n>2</n></r></e><fnm>+</fnm><n>5</n><lbl altCopy="(%o26)	">(%o26) </lbl><v>Area</v><fnm>=</fnm><n>61.33333333333333</n>
+</mth></output>
+</cell>
+
+<cell type="code">
+<input>
+<editor type="input">
+<line>f(x):= 6/(7*x+5);</line>
+<line>[a, b]:[1, 2]$</line>
+<line>h:(b-a)/2$</line>
+<line>c:a+h$</line>
+<line>&apos;Area=(h/3)*(f(a)+4*f(c)+f(b)), numer ;</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o27)	">(%o27) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><f><r><n>6</n></r><r><n>7</n><h>·</h><v>x</v><fnm>+</fnm><n>5</n></r></f><lbl altCopy="(%o31)	">(%o31) </lbl><v>Area</v><fnm>=</fnm><n>0.394029428409734</n>
+</mth></output>
+</cell>
+
+<cell type="code">
+<input>
+<editor type="input">
+<line>f(x):= 1/(5+3*x);</line>
+<line>[a, b]:[1, 2]$</line>
+<line>h:(b-a)/2$</line>
+<line>c:a+h$</line>
+<line>&apos;Area=(h/3)*(f(a)+4*f(c)+f(b)), numer ;</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o32)	">(%o32) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><f><r><n>1</n></r><r><n>5</n><fnm>+</fnm><n>3</n><h>·</h><v>x</v></r></f><lbl altCopy="(%o36)	">(%o36) </lbl><v>Area</v><fnm>=</fnm><n>0.1061602870813397</n>
+</mth></output>
+</cell>
+</fold>
+</cell>
+
+<cell type="subsection" sectioning_level="3">
+<editor type="subsection" sectioning_level="3">
+<line>simpsons 3/8 rule</line>
+</editor>
+<fold>
+<cell type="code">
+<input>
+<editor type="input">
+<line>f(x):= x*(x-1);</line>
+<line>[a, b]:[3,4]$</line>
+<line>h:(b-a)/3$</line>
+<line>c:a+h$ d:c+h$</line>
+<line>&apos;Area=(3*h/8)*(f(a)+3*f(c)+3*f(d)+f(b)), numer;</line>
+<line>wxplot2d(f(x),[x, a, b])$</line>
+<line></line>
+<line>/*in case they also ask for the exact value of the integral in the question*/</line>
+<line>&apos;exact_value_of_integral=float(integrate(f(x), x, a, b));</line>
+<line></line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o111)	">(%o111) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><v>x</v><h>·</h><r><p><v>x</v><fnm>−</fnm><n>1</n></p></r><lbl altCopy="(%o116)	">(%o116) </lbl><v>Area</v><fnm>=</fnm><n>8.833333333333332</n><lbl altCopy="(%t117)	">(%t117) </lbl><img ppi="120">image26.png</img><lbl altCopy="(%o118)	">(%o118) </lbl><v>exact_value_of_integral</v><fnm>=</fnm><n>8.833333333333334</n>
+</mth></output>
+</cell>
+
+<cell type="code">
+<input>
+<editor type="input">
+<line>f(x):= 6/(7*x+5);</line>
+<line>[a, b]:[1, 2]$</line>
+<line>h:(b-a)/3$</line>
+<line>c:a+h$ d:c+h$</line>
+<line>&apos;Area=(3*h/8)*(f(a)+3*f(c)+3*f(d)+f(b)), numer ;</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o43)	">(%o43) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><f><r><n>6</n></r><r><n>7</n><h>·</h><v>x</v><fnm>+</fnm><n>5</n></r></f><lbl altCopy="(%o48)	">(%o48) </lbl><v>Area</v><fnm>=</fnm><n>0.39395042839657285</n>
+</mth></output>
+</cell>
+
+<cell type="code">
+<input>
+<editor type="input">
+<line>f(x):= 1/(5+3*x);</line>
+<line>[a, b]:[1, 2]$</line>
+<line>h:(b-a)/3$</line>
+<line>c:a+h$ d:c+h$</line>
+<line>&apos;Area=(3*h/8)*(f(a)+3*f(c)+3*f(d)+f(b)), numer ;</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o49)	">(%o49) </lbl><fn><r><fnm>f</fnm></r><r><p><v>x</v></p></r></fn><fnm>:=</fnm><f><r><n>1</n></r><r><n>5</n><fnm>+</fnm><n>3</n><h>·</h><v>x</v></r></f><lbl altCopy="(%o54)	">(%o54) </lbl><v>Area</v><fnm>=</fnm><n>0.10615530303030303</n>
+</mth></output>
+</cell>
+</fold>
+</cell>
+</fold>
+</cell>
+
+<cell type="section" sectioning_level="2">
+<editor type="section" sectioning_level="2">
+<line>Euler&apos;s Method / RK1</line>
+</editor>
+<fold>
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line>dif(x, y):=sin(x);</line>
+<line>&apos;Initial_values=[x1, y1]:[0,1];</line>
+<line>del_x:0.01$</line>
+<line></line>
+<line>f(p ,graph):=for i:1 thru abs(p/del_x)+2 do(</line>
+<line>    if (i=1) then </line>
+<line>        (y_val:[y1], h:del_x*((p-x1)/abs(p-x1)), x_val:makelist(a, a, x1, p, h))</line>
+<line>    elseif (i&lt;abs(p/del_x)+2) then </line>
+<line>        (c:y_val[i-1] + h*dif(x_val[i-1], y_val[i-1]), y_val:endcons(c, y_val))</line>
+<line>    else (print(&quot;function at    x=&quot;, p, &quot;is    y=&quot;,  c), </line>
+<line>        if graph then (wxplot2d([discrete, x_val, y_val]))))$</line>
+<line>f(-10, false)$  /*true- for graph*/</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o1)	">(%o1) </lbl><fn><r><fnm>dif</fnm></r><r><p><v>x</v><fnm>,</fnm><v>y</v></p></r></fn><fnm>:=</fnm><fn><r><fnm>sin</fnm></r><r><p><v>x</v></p></r></fn><lbl altCopy="(%o2)	">(%o2) </lbl><v>Initial_values</v><fnm>=</fnm><r list="true"><t listdelim="true">[</t><n>0</n><fnm>,</fnm><n>1</n><t listdelim="true">]</t></r><st breakline="true">function at    x=</st><st> </st><fnm>−</fnm><n>10</n><st> </st><st>is    y=</st><st> </st><n>2.841776309009378</n><st> </st>
+</mth></output>
+</cell>
+
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line>dif(x, y):=5*x^4;</line>
+<line>&apos;Initial_values=[x1, y1]:[0,0];</line>
+<line>del_x:0.01$</line>
+<line></line>
+<line>f(p ,graph):=for i:1 thru abs(p/del_x)+2 do(</line>
+<line>    if (i=1) then </line>
+<line>        (y_val:[y1], h:del_x*((p-x1)/abs(p-x1)), x_val:makelist(a, a, x1, p, h))</line>
+<line>    elseif (i&lt;abs(p/del_x)+2) then </line>
+<line>        (c:y_val[i-1] + h*dif(x_val[i-1], y_val[i-1]), y_val:endcons(c, y_val))</line>
+<line>    else (print(&quot;function at    x=&quot;, p, &quot;is    y=&quot;,  c), </line>
+<line>        if graph then (wxplot2d([discrete, x_val, y_val]))))$</line>
+<line>f(-10, false)$  /*true- for graph*/</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o1)	">(%o1) </lbl><fn><r><fnm>dif</fnm></r><r><p><v>x</v><fnm>,</fnm><v>y</v></p></r></fn><fnm>:=</fnm><n>5</n><h>·</h><e><r><v>x</v></r><r><n>4</n></r></e><lbl altCopy="(%o2)	">(%o2) </lbl><v>Initial_values</v><fnm>=</fnm><r list="true"><t listdelim="true">[</t><n>0</n><fnm>,</fnm><n>0</n><t listdelim="true">]</t></r><st breakline="true">function at    x=</st><st> </st><fnm>−</fnm><n>10</n><st> </st><st>is    y=</st><st> </st><fnm>−</fnm><n>99750.16666664372</n><st> </st>
+</mth></output>
+</cell>
+
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line>dif(x, y):=cos(x);</line>
+<line>&apos;Initial_values=[x1, y1]:[0,0];</line>
+<line>del_x:0.01$</line>
+<line></line>
+<line>f(p ,graph):=for i:1 thru abs(p/del_x)+2 do(</line>
+<line>    if (i=1) then </line>
+<line>        (y_val:[y1], h:del_x*((p-x1)/abs(p-x1)), x_val:makelist(a, a, x1, p, h))</line>
+<line>    elseif (i&lt;abs(p/del_x)+2) then </line>
+<line>        (c:y_val[i-1] + h*dif(x_val[i-1], y_val[i-1]), y_val:endcons(c, y_val))</line>
+<line>    else (print(&quot;function at    x=&quot;, p, &quot;is    y=&quot;,  c), </line>
+<line>        if graph then (wxplot2d([discrete, x_val, y_val]))))$</line>
+<line>f(-10, true)$  /*true- for graph*/</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o1)	">(%o1) </lbl><fn><r><fnm>dif</fnm></r><r><p><v>x</v><fnm>,</fnm><v>y</v></p></r></fn><fnm>:=</fnm><fn><r><fnm>cos</fnm></r><r><p><v>x</v></p></r></fn><lbl altCopy="(%o2)	">(%o2) </lbl><v>Initial_values</v><fnm>=</fnm><r list="true"><t listdelim="true">[</t><n>0</n><fnm>,</fnm><n>0</n><t listdelim="true">]</t></r><st breakline="true">function at    x=</st><st> </st><fnm>−</fnm><n>10</n><st> </st><st>is    y=</st><st> </st><n>0.5348212197270632</n><st> </st><lbl altCopy="(%t5)	">(%t5) </lbl><img ppi="120">image27.png</img>
+</mth></output>
+</cell>
+</fold>
+</cell>
+
+<cell type="section" sectioning_level="2">
+<editor type="section" sectioning_level="2">
+<line>RK4</line>
+</editor>
+<fold>
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line>dif(x, y):=-2*y+x^2;</line>
+<line>&apos;Initial_values=[x1, y1]:[0,1];</line>
+<line>&apos;Interval=[a,b]:[0, 6];</line>
+<line>n:3$</line>
+<line>h:(b-a)/n;</line>
+<line>X:makelist(x, x, a, b, h)$</line>
+<line>Y:[y1]$</line>
+<line>for i:2 thru n+1 do(</line>
+<line>    u:X[i-1], v:Y[i-1], </line>
+<line>    k1:h*dif(u, v), k2:h*dif(u+h/2, v+k1/2),</line>
+<line>    k3:h*dif(u+h/2, v+k2/2), k4:h*dif(u+h, v+k3),</line>
+<line>    c:v+(k1+2*k2+2*k3+k4)/6, Y:endcons(float(c), Y))$</line>
+<line>for i:1 thru n+1 do print(concat(x, i), &quot;=&quot;, X[i], &quot;-&gt;&quot;, concat(y, i), &quot;=&quot;, Y[i]);</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o1)	">(%o1) </lbl><fn><r><fnm>dif</fnm></r><r><p><v>x</v><fnm>,</fnm><v>y</v></p></r></fn><fnm>:=</fnm><fnm>−</fnm><n>2</n><h>·</h><v>y</v><fnm>+</fnm><e><r><v>x</v></r><r><n>2</n></r></e><lbl altCopy="(%o2)	">(%o2) </lbl><v>Initial_values</v><fnm>=</fnm><r list="true"><t listdelim="true">[</t><n>0</n><fnm>,</fnm><n>1</n><t listdelim="true">]</t></r><lbl altCopy="(%o3)	">(%o3) </lbl><v>Interval</v><fnm>=</fnm><r list="true"><t listdelim="true">[</t><n>0</n><fnm>,</fnm><n>6</n><t listdelim="true">]</t></r><lbl altCopy="(h)	" userdefinedlabel="h">(%o5) </lbl><n>2</n><v breakline="true">x1</v><st> </st><st>=</st><st> </st><n>0</n><st> </st><st>→</st><st> </st><v>y1</v><st> </st><st>=</st><st> </st><n>1</n><st> </st><v breakline="true">x2</v><st> </st><st>=</st><st> </st><n>2</n><st> </st><st>→</st><st> </st><v>y2</v><st> </st><st>=</st><st> </st><n>7.666666666666667</n><st> </st><v breakline="true">x3</v><st> </st><st>=</st><st> </st><n>4</n><st> </st><st>→</st><st> </st><v>y3</v><st> </st><st>=</st><st> </st><n>41.0</n><st> </st><v breakline="true">x4</v><st> </st><st>=</st><st> </st><n>6</n><st> </st><st>→</st><st> </st><v>y4</v><st> </st><st>=</st><st> </st><n>191.66666666666666</n><st> </st><lbl altCopy="(%o9)	">(%o9) </lbl><v>done</v>
+</mth></output>
+</cell>
+
+<cell type="code">
+<input>
+<editor type="input">
+<line>kill(all)$</line>
+<line>dif(x, y):=3*x^2;</line>
+<line>&apos;Initial_values=[x1, y1]:[0,0];</line>
+<line>del_x:0.001$</line>
+<line></line>
+<line>f(p):=for i:1 thru abs(p/del_x)+2 do(</line>
+<line>    if (i=1) then </line>
+<line>        (Y:[y1], h:del_x*((p-x1)/abs(p-x1)), X:makelist(a, a, x1, p, h))</line>
+<line>    elseif (i&lt;abs(p/del_x)+2) then </line>
+<line>        (u:X[i-1], v:Y[i-1], </line>
+<line>         k1:h*dif(u, v), k2:h*dif(u+h/2, v+k1/2),</line>
+<line>         k3:h*dif(u+h/2, v+k2/2), k4:h*dif(u+h, v+k3),</line>
+<line>        c:v+(k1+2*k2+2*k3+k4)/6, Y:endcons(c, Y))</line>
+<line>    else return(c))$</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o1)	">(%o1) </lbl><fn><r><fnm>dif</fnm></r><r><p><v>x</v><fnm>,</fnm><v>y</v></p></r></fn><fnm>:=</fnm><n>3</n><h>·</h><e><r><v>x</v></r><r><n>2</n></r></e><lbl altCopy="(%o2)	">(%o2) </lbl><v>Initial_values</v><fnm>=</fnm><r list="true"><t listdelim="true">[</t><n>0</n><fnm>,</fnm><n>0</n><t listdelim="true">]</t></r>
+</mth></output>
+</cell>
+
+<cell type="code">
+<input>
+<editor type="input">
+<line>f(10);</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o5)	">(%o5) </lbl><n>1000.0000000000966</n>
+</mth></output>
+</cell>
+
+<cell type="code">
+<input>
+<editor type="input">
+<line>f(-5);</line>
+</editor>
+</input>
+<output>
+<mth><lbl altCopy="(%o6)	">(%o6) </lbl><fnm>−</fnm><n>124.99999999998668</n>
+</mth></output>
+</cell>
+</fold>
+</cell>
+
+</wxMaximaDocument>
